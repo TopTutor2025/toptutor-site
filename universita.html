@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Università - TopTutor</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="fav/favicon.ico.png" type="image/x-icon">
+
+  <style>
+    :root {
+      --navy: #16163f;
+      --purple: #f7c7d6;
+      --bg1: #f7c7d6;
+      --bg2: #f7c7d6;
+      --muted: rgba(22, 22, 63, 0.72);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--navy);
+      background: #fff;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== NAVBAR ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(8px);
+      transition: background 180ms ease;
+    }
+    .site-header.is-scrolled { background: rgba(255, 255, 255, 0.3); }
+
+    .navbar {
+      height: 72px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo img { height: 125px; display: block; }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .menu-link.active { color: var(--purple); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-btn {
+      background: rgb(242, 241, 241);
+      color: #000000;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* Burger */
+    .burger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .burger span {
+      display: block;
+      height: 2px;
+      background: var(--navy);
+      margin: 6px 0;
+      border-radius: 2px;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      padding: 14px 16px 18px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(22, 22, 63, 0.12);
+    }
+
+    .mobile-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 12px;
+      padding: 8px 2px;
+    }
+
+    .mobile-link {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      padding: 12px 10px;
+      border-radius: 12px;
+    }
+
+    .mobile-link:hover { background: rgba(22, 22, 63, 0.06); }
+
+    .app-mobile {
+      display: inline-flex;
+      justify-content: center;
+      margin-top: 6px;
+      width: fit-content;
+    }
+
+    .site-header.menu-open .mobile-menu { display: block; }
+
+    .site-header.menu-open .burger span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .site-header.menu-open .burger span:nth-child(2) { opacity: 0; }
+    .site-header.menu-open .burger span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 900px) {
+      .menu-desktop { display: none; }
+      .app-desktop { display: none; }
+      .burger { display: inline-block; }
+      .navbar { padding: 0 16px; }
+      .logo img { height: 86px; width: auto; }
+      .navbar { height: 72px; }
+    }
+
+    /* ===== HERO (come home) ===== */
+    .hero {
+      min-height: 88vh;
+      background: radial-gradient(1200px 520px at 50% 110%, var(--bg2) 0%, var(--bg1) 52%, #ffffff 100%);
+      text-align: center;
+      padding: 140px 20px 90px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px 0;
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0 auto 26px;
+      max-width: 860px;
+      font-size: 20px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* ===== BARRA ANIMATA (come home) ===== */
+    .animated-bar {
+      max-width: 980px;
+      margin: 34px auto 0;
+      padding: 14px;
+      border-radius: 999px;
+      background: #f7c7d6;
+    }
+
+    .animated-bar .inner {
+      background: #fffeff;
+      border-radius: 999px;
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 10px 22px rgba(22, 22, 63, 0.08);
+    }
+
+    .animated-bar .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(22, 22, 63, 0.12);
+      color: #120b56;
+    }
+
+    .animated-bar .icon svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .animated-bar .text {
+      font-size: 22px;
+      color: rgba(22, 22, 63, 0.92);
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .animated-bar .text .prefix { opacity: 0.85; font-weight: 500; }
+    .animated-bar .text .subject { font-weight: 900; }
+
+    .animated-bar .btn {
+      background: #f7c7d6;
+      color: #040404;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 26px;
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .subject.fade-out {
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .subject.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 { font-size: 42px; }
+      .animated-bar .text { font-size: 18px; }
+      .animated-bar .btn { font-size: 16px; padding: 10px 18px; }
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: #fffdfe;
+      color: rgb(0, 0, 0);
+      padding: 26px 20px;
+      text-align: center;
+    }
+
+    .site-footer p {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header" id="siteHeader">
+  <nav class="navbar" aria-label="Barra di navigazione">
+    <a class="logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" />
+    </a>
+
+    <div class="menu menu-desktop" aria-label="Menu principale">
+      <a class="menu-link" href="index.html">Ripetizioni</a>
+      <a class="menu-link active" href="universita.html">Università</a>
+      <a class="menu-link" href="prenota.html">Prenota</a>
+    </div>
+
+    <div class="nav-actions">
+      <a class="app-btn app-desktop" href="https://toptutor.cloud" target="_blank" rel="noopener noreferrer">
+        Organizza il tuo studio
+      </a>
+
+      <button class="burger" id="burgerBtn" type="button" aria-label="Apri menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-inner">
+      <a class="mobile-link" href="index.html">Ripetizioni</a>
+      <a class="mobile-link" href="universita.html">Università</a>
+      <a class="mobile-link" href="prenota.html">Prenota</a>
+
+      <a class="app-btn app-mobile" href="https://toptutor.cloud" target="_blank" rel="noopener noreferrer">
+        Organizza il tuo studio
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Supera i tuoi esami con toptutor.it</h1>
+    <p>
+      Semestre filtro, TOLC, professioni sanitarie 2026
+    </p>
+
+    <div class="animated-bar" aria-label="Barra animata materie">
+      <div class="inner">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M7 3h7l3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path d="M14 3v4a2 2 0 0 0 2 2h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <div class="text">
+          <span class="prefix">Prova</span>
+          <span class="subject fade-in" id="rotatingSubject">"Fisica medica"</span>
+        </div>
+
+        <a href="prenota.html" class="btn" aria-label="Vai alla pagina Prenota">
+          a soli 15€
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>© <span id="currentYear"></span> TopTutor.online — Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+  // header blur on scroll
+  const header = document.getElementById("siteHeader");
+  function onScroll() {
+    if (window.scrollY > 0) header.classList.add("is-scrolled");
+    else header.classList.remove("is-scrolled");
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // hamburger menu
+  (function () {
+    const burger = document.getElementById("burgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    if (!header || !burger || !mobileMenu) return;
+
+    function closeMenu() {
+      header.classList.remove("menu-open");
+      burger.setAttribute("aria-expanded", "false");
+      mobileMenu.setAttribute("aria-hidden", "true");
+    }
+
+    function toggleMenu() {
+      const open = header.classList.toggle("menu-open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+
+    burger.addEventListener("click", toggleMenu);
+
+    mobileMenu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  })();
+
+  // anno footer
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+  // rotating subjects (versione università)
+  (function () {
+    const el = document.getElementById("rotatingSubject");
+    if (!el) return;
+
+    const subjects = [
+      "Fisica medica",
+      "Chimica",
+      "Biologia",
+      "Biochimica",
+      "Corso semestre filtro",
+      "Quiz",
+      "Fisiologia",
+      "Anatomia",
+      "Patologia",
+      "Istologia",
+      "TOLC",
+      "Microbilogia"
+    ];
+
+    let i = 0;
+
+    function setSubject(text) {
+      el.classList.remove("fade-in");
+      el.classList.add("fade-out");
+
+      setTimeout(() => {
+        el.textContent = `"${text}"`;
+        el.classList.remove("fade-out");
+        el.classList.add("fade-in");
+      }, 180);
+    }
+
+    setSubject(subjects[i]);
+
+    setInterval(() => {
+      i = (i + 1) % subjects.length;
+      setSubject(subjects[i]);
+    }, 1500);
+  })();
+</script>
+
+</body>
+</html>
+

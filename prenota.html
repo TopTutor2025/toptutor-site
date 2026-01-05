@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Prenota una lezione – TopTutor</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="fav/favicon.ico.png" type="image/x-icon">
+
+  <style>
+    :root {
+      --navy: #16163f;
+      --purple: #f7c7d6;
+      --muted: rgba(22, 22, 63, 0.72);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--navy);
+      background: #ffffff;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== NAVBAR ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0);
+      backdrop-filter: blur(8px);
+      transition: background 180ms ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .navbar {
+      height: 72px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo img {
+      height: 125px;
+      display: block;
+    }
+
+    .menu {
+      display: flex;
+      gap: 34px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .menu-link.active {
+      color: var(--purple);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-btn {
+      background: rgb(242, 241, 241);
+      color: #000;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* Burger */
+    .burger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .burger span {
+      display: block;
+      height: 2px;
+      background: var(--navy);
+      margin: 6px 0;
+      border-radius: 2px;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(22,22,63,0.12);
+    }
+
+    .mobile-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .mobile-link {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 12px 10px;
+      border-radius: 12px;
+    }
+
+    .site-header.menu-open .mobile-menu {
+      display: block;
+    }
+
+    .site-header.menu-open .burger span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .site-header.menu-open .burger span:nth-child(2) {
+      opacity: 0;
+    }
+    .site-header.menu-open .burger span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 900px) {
+      .menu { display: none; }
+      .burger { display: inline-block; }
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      padding: 120px 20px 40px;
+      min-height: 70vh;
+    }
+
+    .widget-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: #fffdfe;
+      padding: 26px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header" id="siteHeader">
+  <nav class="navbar">
+    <a class="logo" href="index.html">
+      <img src="img/logo.png" alt="Logo TopTutor">
+    </a>
+
+    <div class="menu">
+      <a class="menu-link" href="index.html">Ripetizioni</a>
+      <a class="menu-link" href="universita.html">Università</a>
+      <a class="menu-link active" href="prenota.html">Prenota</a>
+    </div>
+
+    <div class="nav-actions">
+      <a class="app-btn" href="https://toptutor.cloud" target="_blank">Organizza il tuo studio</a>
+
+      <button class="burger" id="burgerBtn" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-inner">
+      <a class="mobile-link" href="index.html">Ripetizioni</a>
+      <a class="mobile-link" href="universita.html">Università</a>
+      <a class="mobile-link" href="prenota.html">Prenota</a>
+      <a class="app-btn" href="https://toptutor.cloud" target="_blank">Organizza il tuo studio</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="widget-wrap">
+    <!-- BOOKEO -->
+    <script
+      type="text/javascript"
+      src="https://bookeo.com/widget.js?a=42553RKTTXN19121A96B76&startmode=customer">
+    </script>
+  </div>
+
+  <div style="height: 20vh;"></div>
+</main>
+
+<footer class="site-footer">
+  <p>© <span id="currentYear"></span> TopTutor.online — Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+  // anno footer
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+  // navbar scroll
+  const header = document.getElementById("siteHeader");
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 0);
+  });
+
+  // hamburger
+  const burger = document.getElementById("burgerBtn");
+  burger.addEventListener("click", () => {
+    header.classList.toggle("menu-open");
+  });
+</script>
+
+</body>
+</html>

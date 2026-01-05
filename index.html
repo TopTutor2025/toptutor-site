@@ -1,0 +1,3374 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="fav/favicon.ico.png" type="image/x-icon">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ripetizioni - TopTutor</title>
+
+    <style>
+      :root {
+        --navy: #16163f;
+        --purple: #f7c7d6;
+        --bg1: #f7c7d6;
+        --bg2: #f7c7d6;
+        --muted: rgba(22, 22, 63, 0.72);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--navy);
+        background: #fff;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      /* NAVBAR */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(8px);
+        transition: background 180ms ease;
+      }
+      .site-header.is-scrolled { background: rgba(255, 255, 255, 0.3); }
+
+      .navbar {
+        height: 72px;
+        padding: 0 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo img { height: 125px; display: block; }
+
+      .menu {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .menu a.active { color: var(--purple); }
+
+      .app-btn {
+        background: rgb(242, 241, 241);
+        color: #000000;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 88vh;
+        background: radial-gradient(1200px 520px at 50% 110%, var(--bg2) 0%, var(--bg1) 52%, #ffffff 100%);
+        text-align: center;
+        padding: 140px 20px 90px;
+      }
+
+      .hero h1 {
+        margin: 0 0 18px 0;
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+
+      .hero p {
+        margin: 0 auto 26px;
+        max-width: 860px;
+        font-size: 20px;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--navy);
+        color: #fff;
+        padding: 12px 26px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .navbar { padding: 0 16px; }
+        .menu { gap: 18px; font-size: 16px; }
+        .hero h1 { font-size: 42px; }
+      }
+
+
+
+/* ===== FAQ ===== */
+.faq {
+  padding: 90px 20px 120px;
+  background: #fff;
+}
+
+.faq h2 {
+  margin: 0 0 40px 0;
+  text-align: center;
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.faq-list {
+  max-width: 1180px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(22, 22, 63, 0.35);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(22, 22, 63, 0.35);
+}
+
+.faq-question {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 26px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--navy);
+}
+
+.faq-question span {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.faq-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  transition: transform 200ms ease;
+}
+
+.faq-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+/* Risposta: animazione altezza */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 240ms ease;
+}
+
+.faq-answer-inner {
+  padding: 0 8px 24px 8px;
+  color: rgba(22, 22, 63, 0.82);
+  line-height: 1.9;
+  font-size: 18px;
+}
+
+/* Stato aperto */
+.faq-item.is-open .faq-answer {
+  max-height: 260px; /* se una risposta è più lunga, aumenta questo numero */
+}
+
+.faq-item.is-open .faq-icon {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 900px) {
+  .faq h2 {
+    font-size: 34px;
+  }
+
+  .faq-question span {
+    font-size: 18px;
+  }
+
+  .faq-answer-inner {
+    font-size: 16px;
+  }
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background: #fffdfe;
+  color: rgb(0, 0, 0);
+  padding: 26px 20px;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+/* ===== BARRA ANIMATA (FAKE SEARCH) ===== */
+.animated-bar {
+  max-width: 980px;
+  margin: 34px auto 0;
+  padding: 14px;
+  border-radius: 999px;
+  background: #f7c7d6; /* rosa chiaro esterno */
+}
+
+.animated-bar .inner {
+  background: #fffeff;
+  border-radius: 999px;
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 10px 22px rgba(22, 22, 63, 0.08);
+}
+
+.animated-bar .icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(22, 22, 63, 0.12);
+  color: #120b56;
+}
+
+.animated-bar .icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.animated-bar .text {
+  font-size: 22px;
+  color: rgba(22, 22, 63, 0.92);
+  display: flex;
+  gap:10px;
+  align-items: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.animated-bar .text .prefix {
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+.animated-bar .text .subject {
+  font-weight: 900;
+}
+
+.animated-bar .btn {
+  background: #f7c7d6;
+  color: #040404;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: default; /* non è un vero tasto cerca */
+}
+
+/* animazione cambio parola */
+.subject.fade-out {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.subject.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+@media (max-width: 900px) {
+  .animated-bar .text {
+    font-size: 18px;
+  }
+  .animated-bar .btn {
+    font-size: 16px;
+    padding: 10px 18px;
+  }
+}
+
+
+
+@media (max-width: 720px) {
+
+  /* la barra torna "search-like" */
+  .animated-bar {
+    padding: 14px;
+  }
+
+  .animated-bar .inner {
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+  }
+
+  /* nascondo il bottone DENTRO la barra */
+  .animated-bar .btn {
+    display: none;
+  }
+
+  /* creo il bottone FUORI dalla barra */
+  .animated-bar::after {
+    content: "Prova a soli 15€";
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 14px auto 0;
+    padding: 12px 26px;
+    background: #ffffff;
+    color: #040404;
+    font-weight: 800;
+    font-size: 16px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+}
+
+
+
+
+
+
+
+/* ===== ANIMAZIONE ON-SCROLL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 2000ms ease, transform 2000ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variante: entra da sinistra (opzionale) */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-18px);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Rispetta chi ha "riduci animazioni" attivo */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+/* ===== COOKIE BANNER ===== */
+.cookie-banner {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  max-width: 1100px;
+  width: calc(100% - 32px);
+  background: #f7c7d6;
+  color: #000000;
+  border-radius: 18px;
+  padding: 22px 26px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  display: none;
+}
+
+.cookie-banner.is-visible {
+  display: block;
+}
+
+.cookie-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px;
+  align-items: center;
+}
+
+.cookie-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgb(0, 0, 0);
+}
+
+.cookie-text a {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cookie-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cookie-btn.accept {
+  background: #ffffff;
+  color: #14153a;
+}
+
+.cookie-btn.reject {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.cookie-btn.settings {
+  background: rgb(255, 255, 255);
+  color: #000000;
+}
+
+@media (max-width: 760px) {
+  .cookie-content {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cookie-actions {
+    justify-content: flex-start;
+  }
+}
+/* ===== NAVBAR + HAMBURGER ===== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-link.active {
+  color: var(--purple);
+}
+
+/* Burger */
+.burger {
+  display: none; /* visibile solo su mobile */
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 10px;
+}
+
+.burger span {
+  display: block;
+  height: 2px;
+  background: var(--navy);
+  margin: 6px 0;
+  border-radius: 2px;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* Mobile menu panel */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 72px;              /* uguale all'altezza navbar */
+  left: 0;
+  right: 0;
+  padding: 14px 16px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(22, 22, 63, 0.12);
+}
+
+.mobile-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+  padding: 8px 2px;
+}
+
+.mobile-link {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 12px 10px;
+  border-radius: 12px;
+}
+
+.mobile-link:hover {
+  background: rgba(22, 22, 63, 0.06);
+}
+
+.app-mobile {
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 6px;
+  width: fit-content;
+}
+
+/* Stato aperto */
+.site-header.menu-open .mobile-menu {
+  display: block;
+}
+
+.site-header.menu-open .burger span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.site-header.menu-open .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.menu-open .burger span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ===== Responsive: sotto 900px attiva hamburger ===== */
+@media (max-width: 900px) {
+  .menu-desktop {
+    display: none;
+  }
+
+  .app-desktop {
+    display: none;
+  }
+
+  .burger {
+    display: inline-block;
+  }
+
+  /* aumenta altezza navbar se serve */
+  .navbar {
+    padding: 0 16px;
+  }
+
+  .logo img {
+    height: 86px; /* logo più grande su mobile */
+    width: auto;
+  }
+
+  /* se la tua navbar ha height diversa, aggiorna anche top della mobile-menu */
+  .navbar {
+    height: 72px;
+  }
+}
+
+/* ===== SEZIONE RATE (FINDOMESTIC + KLARNA) ===== */
+.installments{
+  padding: 90px 20px 90px;
+  background: #fff;
+  text-align: left;
+}
+
+.installments-wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.installments-title{
+  margin: 0;
+  font-size: 46px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.installments-underline{
+  display: inline-block;
+  width: 42px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--navy);
+  margin-top: 14px;
+}
+
+.installments-grid{
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.installments-card{
+  border: 1px solid rgba(22, 22, 63, 0.14);
+  border-radius: 26px;
+  padding: 28px 30px;
+  background: #fff;
+}
+
+.installments-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.installments-kicker{
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(22, 22, 63, 0.9);
+}
+
+.installments-brand{
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.installments-mini-underline{
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--navy);
+  margin-top: 10px;
+}
+
+.installments-text{
+  margin: 0 0 18px 0;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(22, 22, 63, 0.88);
+}
+
+.installments-text a{
+  color: var(--navy);
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+/* "Logo" (placeholder) Findomestic */
+.installments-logo{
+  font-size: 14px;
+  font-weight: 800;
+  color: rgba(22, 22, 63, 0.7);
+  padding-top: 6px;
+  white-space: nowrap;
+}
+
+/* Pill Klarna */
+.installments-pill{
+  background: #ffd0df;
+  color: #1b0b12;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .installments-title{
+    font-size: 34px;
+  }
+
+  .installments-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .installments-card{
+    padding: 22px 20px;
+    border-radius: 22px;
+  }
+
+  .installments-kicker{
+    font-size: 16px;
+  }
+
+  .installments-text{
+    font-size: 16px;
+  }
+}
+/* ===== SLIDER MATERIE (pill rosa + frecce) ===== */
+.subjects-slider {
+  padding: 0px 20px 10px;
+  background: #fff;
+}
+
+.subjects-slider__shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  background: #f7c7d6;              /* rosa esterno */
+  border-radius: 999px;
+  padding: 18px 68px;               /* spazio per frecce */
+  overflow: hidden;
+}
+
+.subjects-slider__track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 6px 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* nasconde scrollbar */
+.subjects-slider__track::-webkit-scrollbar { height: 0; }
+.subjects-slider__track { scrollbar-width: none; }
+
+.subject-pill {
+  scroll-snap-align: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--navy);
+  background: transparent;
+  white-space: nowrap;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.subject-pill:hover {
+  background: rgba(255,255,255,0.35);
+  transform: translateY(-1px);
+}
+
+.subject-pill__icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: #16163f;
+}
+
+.subject-pill__icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.subject-pill__label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* frecce */
+.subjects-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255,255,255,0.92);
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(22, 22, 63, 0.18);
+}
+
+.subjects-slider__arrow--left { left: 14px; }
+.subjects-slider__arrow--right { right: 14px; }
+
+.subjects-slider__arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* mobile: pill più compatte */
+@media (max-width: 700px) {
+  .subjects-slider__shell {
+    padding: 16px 58px;
+  }
+  .subject-pill__label {
+    font-size: 16px;
+  }
+  .subjects-slider__track {
+    gap: 18px;
+  }
+}
+/* ===== SEZIONE SPLIT (testo + immagine) ===== */
+.feature-split {
+  padding: 5px 20px;
+  background: #fff;
+}
+
+.feature-split__container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.feature-split__badge {
+  display: inline-block;
+  background: #ffe48c;
+  color: #14153a;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.feature-split__title {
+  margin: 0 0 22px 0;
+  font-size: 56px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.feature-split__highlight {
+  color: #f7c7d6; /* blu come esempio */
+}
+
+.feature-split__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px 0;
+  display: grid;
+  gap: 18px;
+  color: rgba(22, 22, 63, 0.88);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.feature-split__list li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.feature-split__check {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #2a2a2a;
+  color: #e4e4e4;
+  font-weight: 900;
+  margin-top: 2px;
+}
+
+.feature-split__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.feature-split__link:hover {
+  text-decoration: underline;
+}
+
+.feature-split__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .feature-split__container {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .feature-split__title {
+    font-size: 38px;
+  }
+
+  .feature-split__list {
+    font-size: 16px;
+  }
+}
+/* ===== SEZIONE "UNA PREPARAZIONE CHE SI ADATTA A TE" ===== */
+.prep {
+  background: #fff;
+  padding: 90px 20px 90px;
+}
+
+.prep-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.prep-title {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.prep-underline {
+  display: inline-block;
+  width: 26px;
+  height: 4px;
+  background: var(--navy);
+  border-radius: 999px;
+  margin-top: 12px;
+}
+
+.prep-lead {
+  margin: 18px 0 22px;
+  max-width: 1050px;
+  font-size: 18px;
+  line-height: 1.9;
+  color: rgba(22, 22, 63, 0.80);
+}
+
+.prep-list {
+  margin: 0;
+  padding-left: 22px; /* pallini */
+  display: grid;
+  gap: 14px;
+  color: rgba(22, 22, 63, 0.92);
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.prep-list strong {
+  color: var(--navy);
+  font-weight: 900;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .prep {
+    padding: 70px 18px 70px;
+  }
+
+  .prep-title {
+    font-size: 32px;
+  }
+
+  .prep-lead,
+  .prep-list {
+    font-size: 16px;
+  }
+}
+/* ====== WHY TESTBUSTERS SECTION ====== */
+.tb-why {
+  padding: clamp(28px, 4vw, 56px) 0;
+}
+
+.tb-why__container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.tb-why__header {
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.tb-why__title {
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #0b0b0f;
+}
+
+.tb-why__underline {
+  display: inline-block;
+  width: 44px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: #0b0b0f;
+}
+
+/* Grid cards */
+.tb-why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+}
+
+/* Card */
+.tb-card {
+  position: relative;
+  border-radius: 18px;
+  padding: clamp(18px, 2.2vw, 26px);
+  background: #1f2330; /* blu notte */
+  color: #ffffff;
+  overflow: hidden;
+  min-height: 140px;
+}
+
+/* Subtle highlight to resemble UI card */
+.tb-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 400px at 20% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.tb-card__icon {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  opacity: 0.9;
+}
+
+.tb-icon {
+  width: 34px;
+  height: 34px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Text styles */
+.tb-card__kicker {
+  margin: 0 0 12px 0;
+  font-weight: 900;
+  font-size: clamp(18px, 1.8vw, 30px);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.tb-card__big {
+  margin: 0 0 12px 0;
+  font-weight: 900;
+  font-size: clamp(28px, 2.8vw, 44px);
+  letter-spacing: 0.01em;
+}
+
+.tb-card__text {
+  margin: 0;
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.35;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .tb-why__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tb-card {
+    min-height: auto;
+  }
+}
+
+/* ====== GOOGLE REVIEWS SECTION ====== */
+.gr {
+  padding: clamp(22px, 4vw, 56px) 0;
+  background: #ffffff;
+}
+
+.gr__container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.gr__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.gr__title {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0b0b0f;
+}
+
+.gr__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.gr__stars {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #f4b400; /* giallo stelle */
+  line-height: 1;
+}
+
+.gr__meta-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.gr__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.gr__cta:hover {
+  background: #f9fafb;
+}
+
+.gr__g-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 13px;
+  color: #111827;
+  background: #f3f4f6;
+}
+
+/* Chips */
+.gr__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 18px;
+}
+
+.gr__chip {
+  appearance: none;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #6b7280;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.gr__chip:hover {
+  background: #f9fafb;
+  color: #374151;
+}
+
+/* Carousel layout */
+.gr__carousel {
+  position: relative;
+  border-radius: 18px;
+}
+
+.gr__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 16px;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 42px; /* spazio per frecce */
+  scrollbar-width: none; /* Firefox */
+}
+
+.gr__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Nav buttons */
+.gr__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+
+.gr__nav--left { left: 6px; }
+.gr__nav--right { right: 6px; }
+
+.gr__nav:hover {
+  background: #f9fafb;
+}
+
+/* Card base */
+.gr-card {
+  scroll-snap-align: start;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  min-height: 190px;
+}
+
+.gr-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.gr-card__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.gr-card__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  flex: 0 0 auto;
+}
+
+.gr-card__user-meta {
+  min-width: 0;
+}
+
+.gr-card__name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #111827;
+}
+
+.gr-card__time {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.gr-card__google {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;
+  font-weight: 800;
+  flex: 0 0 auto;
+}
+
+.gr-card__stars {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #f4b400;
+  margin-bottom: 10px;
+}
+
+.gr-card__text {
+  margin: 0 0 10px 0;
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.gr-card__link {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+}
+
+.gr-card__link:hover {
+  text-decoration: underline;
+}
+
+/* Summary card (gradient like screenshot) */
+.gr-card--summary {
+  border: none;
+  background: linear-gradient(135deg, #d9f1ff 0%, #f6d8ff 55%, #ffe6d0 100%);
+}
+
+.gr-card__summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.gr-card__summary-title {
+  font-weight: 800;
+  color: #111827;
+}
+
+/* Summary footer avatars */
+.gr-card__footer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gr-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.gr-avatars__img {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.12);
+  border: 2px solid rgba(255,255,255,0.9);
+  margin-left: -8px;
+}
+
+.gr-avatars__img:first-child {
+  margin-left: 0;
+}
+
+.gr-avatars__more {
+  width: 34px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(17, 24, 39, 0.18);
+  color: #111827;
+  font-weight: 800;
+  font-size: 12px;
+  border: 2px solid rgba(255,255,255,0.9);
+  margin-left: -8px;
+}
+
+.gr-card__footnote {
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.75);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .gr__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gr__track {
+    padding: 6px 0;
+  }
+
+  .gr__nav {
+    display: none;
+  }
+}
+
+/* ====== PRICING / PIANI ====== */
+.tb-pricing {
+  padding: clamp(28px, 4vw, 64px) 0;
+  background: #ffffff;
+}
+
+.tb-pricing__container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.tb-pricing__header {
+  margin-bottom: 18px;
+}
+
+.tb-pricing__title {
+  margin: 0 0 6px 0;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0b0b0f;
+}
+
+.tb-pricing__subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Grid */
+.tb-pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+  align-items: stretch;
+}
+
+/* Card */
+.tb-plan {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #f0d6d6; /* leggero rosato come nello screen */
+  border-radius: 22px;
+  padding: 26px 26px 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.tb-plan--featured {
+  background: #fde8e6; /* rosa chiaro */
+  border-color: #fde8e6;
+}
+
+.tb-plan__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #ff3b0a;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+
+/* Top */
+.tb-plan__top {
+  padding-top: 6px;
+}
+
+.tb-plan__eyebrow {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.tb-plan__name {
+  margin: 6px 0 6px 0;
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #0b0b0f;
+}
+
+.tb-plan__name-underline {
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  border-radius: 999px;
+  background: #0b0b0f;
+}
+
+/* Price row */
+.tb-plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.tb-plan__price-now {
+  font-size: clamp(34px, 3.2vw, 44px);
+  font-weight: 900;
+  color: #0b0b0f;
+  letter-spacing: -0.02em;
+}
+
+.tb-plan__price-was {
+  font-size: 18px;
+  color: #6b7280;
+  text-decoration: line-through;
+}
+
+.tb-plan__save {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #0b0b0f;
+  font-weight: 600;
+}
+
+/* Button */
+.tb-plan__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: #1f2330; /* blu notte */
+  color: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.tb-plan__btn:hover {
+  filter: brightness(1.05);
+}
+
+.tb-plan__btn-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+}
+
+.tb-cart {
+  width: 22px;
+  height: 22px;
+}
+
+/* Divider */
+.tb-plan__divider {
+  height: 1px;
+  background: rgba(17, 24, 39, 0.15);
+  margin: 20px 0 18px;
+}
+
+/* Features */
+.tb-plan__section-title {
+  font-weight: 900;
+  color: #0b0b0f;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.tb-plan__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.tb-plan__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #111827;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.tb-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #1f2330;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  flex: 0 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .tb-pricing__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tb-plan {
+    padding: 22px 20px 18px;
+  }
+}
+
+/* ====== STEPS SECTION ====== */
+.tb-steps {
+  padding: clamp(28px, 4vw, 64px) 0;
+  background: #ffffff;
+}
+
+.tb-steps__container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.tb-steps__header {
+  margin-bottom: clamp(18px, 2.5vw, 28px);
+}
+
+.tb-steps__title {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  color: #0b0b0f;
+}
+
+/* Grid */
+.tb-steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.4vw, 30px);
+  align-items: start;
+}
+
+/* Card */
+.tb-step {
+  display: grid;
+  gap: 14px;
+}
+
+.tb-step__box {
+  position: relative;
+  border-radius: 26px;
+  height: clamp(210px, 22vw, 300px);
+  overflow: hidden;
+}
+
+.tb-step__box--pink {
+  background: #fdeced;
+}
+
+.tb-step__box--blue {
+  background: #9bc9ff;
+}
+
+/* Step title + text */
+.tb-step__name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  color: #0b0b0f;
+}
+
+.tb-step__text {
+  margin: 0;
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 48ch;
+}
+
+/* Icon box (step 1) */
+.tb-step__icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 92px;
+  height: 92px;
+  border-radius: 26px;
+  display: grid;
+  place-items: center;
+}
+
+.tb-step__icon--red {
+  background: #ff4d57;
+  color: #ffffff;
+}
+
+.tb-step__svg {
+  width: 34px;
+  height: 34px;
+}
+
+/* Center illustration (step 2) */
+.tb-bubble {
+  position: absolute;
+  border-radius: 16px;
+}
+
+.tb-bubble--white { background: #ffffff; }
+.tb-bubble--light { background: rgba(255,255,255,0.55); }
+
+.tb-bubble--tl {
+  width: 110px; height: 70px;
+  top: 52px; left: 76px;
+}
+
+.tb-bubble--mr {
+  width: 110px; height: 70px;
+  top: 112px; right: 76px;
+}
+
+.tb-bubble--bl {
+  width: 120px; height: 70px;
+  bottom: 56px; left: 86px;
+}
+
+.tb-dot {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-radius: 999px;
+}
+
+.tb-dot--red { background: #ff4d57; }
+.tb-dot--blue { background: #0b66ff; }
+
+.tb-dot--tl { top: 86px; left: 54px; }
+.tb-dot--mr { top: 144px; right: 54px; }
+.tb-dot--bl { bottom: 86px; left: 60px; }
+
+.tb-smile {
+  position: absolute;
+  bottom: 78px;
+  left: 130px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #ff4d57;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .tb-steps__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tb-step__box {
+    height: 240px;
+  }
+}
+
+</style>
+  </head>
+
+  <body>
+   <header class="site-header" id="siteHeader">
+  <nav class="navbar" aria-label="Barra di navigazione">
+    <!-- Logo -->
+    <a class="logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" />
+    </a>
+
+    <!-- Menu desktop -->
+    <div class="menu menu-desktop" aria-label="Menu principale">
+      <a class="menu-link" href="index.html">Ripetizioni</a>
+      <a class="menu-link" href="universita.html">Università</a>
+      <a class="menu-link" href="prenota.html">Prenota</a>
+    </div>
+
+    <!-- Azioni desktop + hamburger -->
+    <div class="nav-actions">
+      <a class="app-btn app-desktop" href="https://toptutor.cloud" target="_blank" rel="noopener noreferrer">Organizza il tuo studio</a>
+
+      <button
+        class="burger"
+        id="burgerBtn"
+        type="button"
+        aria-label="Apri menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu mobile -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-inner">
+      <a class="mobile-link" href="index.html">Ripetizioni</a>
+      <a class="mobile-link" href="universita.html">Università</a>
+      <a class="mobile-link" href="prenota.html">Prenota</a>
+
+      <a
+        class="app-btn app-mobile"
+        href="https://toptutor.cloud"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Organizza il tuo studio
+      </a>
+    </div>
+  </div>
+</header>
+
+
+    <main>
+      <section class="hero">
+        <h1>Recupera con le ripetizioni di toptutor.it</h1>
+        <p>
+          Medie, Superiori, Università
+        </p>
+        <div class="animated-bar" aria-label="Barra animata materie">
+  <div class="inner">
+    <div class="icon" aria-hidden="true">
+      <!-- icona tipo "documento" -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M7 3h7l3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"
+        />
+        <path d="M14 3v4a2 2 0 0 0 2 2h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div class="text">
+      <span class="prefix">Prova</span>
+      <span class="subject fade-in" id="rotatingSubject">"Disegno"</span>
+    </div>
+<a href="prenota.html" class="btn" aria-label="Vai alla pagina Prenota">
+  Prova a soli 15€
+</a>
+  </div>
+</div>
+      </section>
+    </main>
+
+    <script>
+      const header = document.getElementById("siteHeader");
+      function onScroll() {
+        if (window.scrollY > 0) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    </script>
+
+    <section class="tb-steps" aria-labelledby="tb-steps-title">
+  <div class="tb-steps__container">
+    <header class="tb-steps__header">
+      <h2 id="tb-steps-title" class="tb-steps__title">
+        Come possiamo aiutarti?<br>
+        
+      </h2>
+    </header>
+
+    <div class="tb-steps__grid">
+      <!-- STEP 1 -->
+      <article class="tb-step">
+        <div class="tb-step__box tb-step__box--pink">
+          <div class="tb-step__icon tb-step__icon--red" aria-hidden="true">
+            <!-- icona lente -->
+            <svg viewBox="0 0 24 24" class="tb-step__svg" focusable="false">
+              <path fill="currentColor" d="M10 2a8 8 0 1 0 4.9 14.3l4.4 4.4a1 1 0 0 0 1.4-1.4l-4.4-4.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/>
+            </svg>
+          </div>
+        </div>
+
+        <h3 class="tb-step__name">Ripetizioni e aiuto compiti</h3>
+        <p class="tb-step__text">
+          Recupera le tue materie e potenzia i tuoi voti con il supporto dei nostri tutor, tutti laureandi e laureati. (Specializzati anche per studenti con DSA)
+        </p>
+      </article>
+
+      <!-- STEP 2 (CENTRALE) -->
+      <article class="tb-step">
+        <div class="tb-step__box tb-step__box--blue">
+          <!-- decorazioni tipo "chat" -->
+          <span class="tb-bubble tb-bubble--white tb-bubble--tl" aria-hidden="true"></span>
+          <span class="tb-dot tb-dot--red tb-dot--tl" aria-hidden="true"></span>
+
+          <span class="tb-bubble tb-bubble--light tb-bubble--mr" aria-hidden="true"></span>
+          <span class="tb-dot tb-dot--blue tb-dot--mr" aria-hidden="true"></span>
+
+          <span class="tb-bubble tb-bubble--white tb-bubble--bl" aria-hidden="true"></span>
+          <span class="tb-dot tb-dot--red tb-dot--bl" aria-hidden="true"></span>
+
+          <span class="tb-smile" aria-hidden="true">☺</span>
+        </div>
+
+        <h3 class="tb-step__name">Corso semestre filtro medicina 2026</h3>
+        <p class="tb-step__text">
+          L'unico corso in Italia studiato a partire da zero per le nuove modalità di ammissione al corso di medicina e chirurgia 2026.
+        </p>
+      </article>
+
+      <!-- STEP 3 -->
+      <article class="tb-step">
+        <div class="tb-step__box tb-step__box--pink"></div>
+
+        <h3 class="tb-step__name">TOLC 2026</h3>
+        <p class="tb-step__text">
+          Prepara con la nostra Academy i test di ammissione TOLC e professioni sanitarie.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section class="tb-why reveal" aria-labelledby="tb-why-title">
+  <div class="tb-why__container">
+    <header class="tb-why__header">
+      <h2 id="tb-why-title" class="tb-why__title">Perchè scegliere toptutor</h2>
+      <span class="tb-why__underline" aria-hidden="true"></span>
+    </header>
+
+    <div class="tb-why__grid">
+      <!-- CARD 1 -->
+      <article class="tb-card">
+        <div class="tb-card__icon" aria-hidden="true">
+          <!-- Icona "presentazione" (SVG inline) -->
+          <svg viewBox="0 0 24 24" class="tb-icon" role="img" focusable="false">
+            <path
+              fill="currentColor"
+              d="M4 4h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H13v2h3a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h3v-2H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v8h14V6H5Z"
+            />
+          </svg>
+        </div>
+
+        <h3 class="tb-card__kicker">+40</h3>
+        <p class="tb-card__text">
+        Materie scientifiche, tecniche, umanistiche, linguistiche
+        </p>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="tb-card">
+        <div class="tb-card__icon" aria-hidden="true">
+          <!-- Icona "refresh" (SVG inline) -->
+          <svg viewBox="0 0 24 24" class="tb-icon" role="img" focusable="false">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5a5 5 0 1 1-8.66-3.54 1 1 0 0 0-1.5-1.32A7 7 0 1 0 12 6Z"
+            />
+          </svg>
+        </div>
+
+        <div class="tb-card__big">+30</div>
+        <p class="tb-card__text">
+          Docenti, tutti laureandi e laureati
+        </p>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="tb-card">
+        <div class="tb-card__icon" aria-hidden="true">
+          <!-- Icona "utenti" (SVG inline) -->
+          <svg viewBox="0 0 24 24" class="tb-icon" role="img" focusable="false">
+            <path
+              fill="currentColor"
+              d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-8 2a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm8 2c-3.33 0-6 1.34-6 3v2h12v-2c0-1.66-2.67-3-6-3ZM8 15c-3.33 0-6 1.34-6 3v2h6v-2c0-1.21.64-2.29 1.72-3.08A9.2 9.2 0 0 0 8 15Z"
+            />
+          </svg>
+        </div>
+
+        <div class="tb-card__big">+500</div>
+        <p class="tb-card__text">Studenti</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section class="feature-split reveal" aria-label="Sezione contenuti e app">
+  <div class="feature-split__container">
+    <!-- SINISTRA: TESTO -->
+    <div class="feature-split__content">
+      <span class="feature-split__badge">Lezioni live e interattive</span>
+
+      <h2 class="feature-split__title">
+        Preparati su<br />
+        <span class="feature-split__highlight">un'unica piattaforma</span><br />
+      </h2>
+
+      <ul class="feature-split__list">
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          I nostri tutor utilizzano tavolette grafiche e lavagne online
+        </li>
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          Scegli tu il giorno e l'ora delle tue lezioni
+        </li>
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          Toptutor non chiude mai! Assistenza 7/7
+        </li>
+      </ul>
+
+      <a class="feature-split__link" href="prenota.html">
+        Prenota subito la tua lezione di prova <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- DESTRA: IMMAGINE -->
+    <div class="feature-split__media">
+      <img
+        src="img/platform-1.png"
+        alt="Anteprima app e contenuti"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="feature-split reveal" aria-label="Sezione contenuti e app">
+  <div class="feature-split__container">
+    <!-- SINISTRA: TESTO -->
+    <div class="feature-split__content">
+      <span class="feature-split__badge">Organizza il tuo studio con la nostra app</span>
+
+      <h2 class="feature-split__title">
+        Programma le tue<br />
+        <span class="feature-split__highlight">interrogazioni e verifiche</span><br />
+      </h2>
+
+      <ul class="feature-split__list">
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+         Organizza le tue furure prove di verifica
+        </li>
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          Tieni traccia delle media delle tue materie
+        </li>
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+         Sfrutta al massimo l'app con il servizio di tutoraggio
+        </li>
+      </ul>
+
+      <a class="feature-split__link" href="prenota.html">
+        Scopri l'innovativo servizio di tutoraggio by toptutor.it <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- DESTRA: IMMAGINE -->
+    <div class="feature-split__media">
+      <img
+        src="img/platform-2.png"
+        alt="Anteprima app e contenuti"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="gr reveal" aria-labelledby="gr-title">
+  <div class="gr__container">
+    <!-- Header -->
+    <header class="gr__header">
+      <div class="gr__header-left">
+        <h2 id="gr-title" class="gr__title">Leggi cosa dicono di noi i nostri studenti</h2>
+
+        <div class="gr__meta" aria-label="Google rating summary">
+          <div class="gr__stars" aria-hidden="true">
+            ★★★★★
+          </div>
+          <div class="gr__meta-text">4.9 rating of Google reviews</div>
+        </div>
+      </div>
+
+      <a class="gr__cta" href="#" target="_blank" rel="noopener">
+        <span class="gr__g-badge" aria-hidden="true">G</span>
+        Lasciaci una recensione!
+      </a>
+    </header>
+
+    <!-- Chips -->
+    <div class="gr__chips" aria-label="Review topics">
+      <button class="gr__chip" type="button">online</button>
+      <button class="gr__chip" type="button">qualità</button>
+      <button class="gr__chip" type="button">Tutor</button>
+      <button class="gr__chip" type="button">DSA</button>
+      <button class="gr__chip" type="button">Passione</button>
+      <button class="gr__chip" type="button">Smart</button>
+      <button class="gr__chip" type="button">Top</button>
+      <button class="gr__chip" type="button">Grazie</button>
+      <button class="gr__chip" type="button">Aiuto compiti</button>
+      <button class="gr__chip" type="button">Tutoraggio</button>
+    </div>
+
+    <!-- Carousel -->
+    <div class="gr__carousel" role="region" aria-label="Google reviews carousel">
+      <button class="gr__nav gr__nav--left" type="button" aria-label="Previous reviews">‹</button>
+
+      <div class="gr__track" id="gr-track">
+        <!-- Card 1: Social proof summary -->
+        <article class="gr-card gr-card--summary" tabindex="0">
+          <div class="gr-card__summary-head">
+            <div class="gr-card__summary-title">Sommario recensioni</div>
+          </div>
+
+          <p class="gr-card__text">
+            Le recensioni esprimono una valutazione complessivamente molto positiva del servizio, con ricorrenza di alcuni elementi chiave: qualità didattica, organizzazione del servizio, disponibilità, supporto e sddisfazione complessiva.
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+
+          <div class="gr-card__footer">
+            <div class="gr-avatars" aria-hidden="true">
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__more">+30</span>
+            </div>
+            <div class="gr-card__footnote">Basato su +100 recensioni</div>
+          </div>
+        </article>
+
+
+<!-- Card 15 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Barbara</div>
+                <div class="gr-card__time">5 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Non è da molto che abbiamo conosciuto questo team, ma devo dire che i ragazzi che lavorano sono preparati spiegano in maniera eccellente anche se le lezioni sono online sono super organizzati e mio figlio non ha trovato nessuna difficoltà nel seguire la lezione. È facile iscriversi e cmq se hai un problema sono sempre disponibili ad aiutarti.
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 14 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Roberta</div>
+                <div class="gr-card__time">6 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Veramente bravi e la loro disponibilità eccezionale li consiglio, mio figlio ha avuto miglioramenti
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+<!-- Card 13 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Alessandra</div>
+                <div class="gr-card__time">7 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+           Super disponibili, fanno di tutto per riuscire a venire incontro alle esigenze e difficoltà dei ragazzi. Altamente consigliati.
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 12 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">francesca</div>
+                <div class="gr-card__time">7 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ripetizioni di fisica docente molto valido e chiaro nella spiegazione, il supporto tecnico è sempre molto disponibile e ti aiuta per qualsiasi cosa, consigliato
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 11 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Aldo</div>
+                <div class="gr-card__time">7 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ottimi tutor, molto preparati, disponibili e chiari nelle spiegazioni. Grazie a loro il mio rendimento scolastico è migliorato.
+Lo consiglio VIVAMENTE.
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 10 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Silva</div>
+                <div class="gr-card__time">8 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Esperienza super positiva,tutor molto bravo e spiegazioni comprensibili, chiare ed efficaci. Ottimo progetto creato da ragazzi giovani ,preparati e disponibili. Un vero e proprio paracadute "salva anno scolastico" !! Stra consigliato 👏🏽
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 9 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Francesca</div>
+                <div class="gr-card__time">9 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Insegnati ben preparati e disponibili, anche l'assistenza super efficiente. Consigliatissimo!
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 8 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Alessandro</div>
+                <div class="gr-card__time">1 anno fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Sono molto colpito dall' organizzazione e dalla disponibilità data dall' organizzatore e dagli insegnanti.
+Sempre molto gentili e pronti ad aiutare, lezioni utili e funzionali adatti all'apprendimento , consiglio vivamente.
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 7 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Roxana</div>
+                <div class="gr-card__time">1 anno fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Professionali e disponibililissimi, Giovanni si sta trovando molto bene .Grazie
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 6 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Cinzia</div>
+                <div class="gr-card__time">2 anni fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ho iniziato da poco il mio percorso universitario con Top Tutor e sono davvero soddisfatta!!
+Fin dal primo contatto il team è stato disponibile e professionale.Un ringraziamento speciale va al mio Tutor Emmanuel,molto preparato e attento.Sin dalla prima lezione ho notato un miglioramento nella comprensione degli argomenti e una maggiore fiducia nelle mie capacità.
+Consiglio questo servizio a chiunque voglia un supporto serio ed efficace nello studio!
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+<!-- Card 5 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Alessia</div>
+                <div class="gr-card__time">2 anni fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ottimo servizio! Gli insegnanti sono competenti, disponibili e spiegano in modo chiaro ed efficace. La piattaforma è intuitiva e comoda per prenotare le lezioni.
+Lo consiglio vivamente!
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 4 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Silvia</div>
+                <div class="gr-card__time">2 anni fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Servizio trovato per caso è stata la svolta! Sono riuscita a preparare un esame grandissimo! Senza di loro non ce l’avrei mai fatta 🩷
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+        <!-- Card 2 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Nadia</div>
+                <div class="gr-card__time">1 anno fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Centro molto preparato in tutte le materie, sempre disponibili e professionali...lo consiglio al 100%... Grazie ragazzi!
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar" aria-hidden="true"></span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Daniela</div>
+                <div class="gr-card__time">6 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Recensione super positiva per TopTutor mio figlio Valerio, seconda liceo, gravi difficoltà in matematica, ha fatto qualche lezione con Roberto e mi torna a casa con un voto 8 al compito di matematica!! Mai successo! Quest'anno evitiamo di portarcela a settembre 🤓 Grazie mille a TopTutor, grazie Roberto e anche a Emmanuel sempre disponibile a trovarmi orari per le lezioni. Voto 💯
+          </p>
+
+          <a class="gr-card__link" href="#" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+      </div>
+
+      <button class="gr__nav gr__nav--right" type="button" aria-label="Next reviews">›</button>
+    </div>
+  </div>
+</section>
+
+
+
+
+<script>
+  // Carousel scroll (senza librerie)
+  (function () {
+    const track = document.getElementById("gr-track");
+    if (!track) return;
+
+    const left = document.querySelector(".gr__nav--left");
+    const right = document.querySelector(".gr__nav--right");
+
+    const scrollByCard = () => {
+      const card = track.querySelector(".gr-card");
+      if (!card) return 320;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || "16");
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    left?.addEventListener("click", () => {
+      track.scrollBy({ left: -scrollByCard(), behavior: "smooth" });
+    });
+
+    right?.addEventListener("click", () => {
+      track.scrollBy({ left: scrollByCard(), behavior: "smooth" });
+    });
+  })();
+</script>
+
+
+
+<section class="prep reveal" id="preparazione">
+  <div class="prep-wrap">
+    <h2 class="prep-title">Tutte le nostre materie e ripetizioni nel tuo pc, tablet o smartphone</h2>
+    <span class="prep-underline" aria-hidden="true"></span>
+
+    <p class="prep-lead">
+      I nostri servizi e il nostro metodo di lavoro garantisce risultati già nel breve periodo
+    </p>
+
+    <ul class="prep-list">
+      <li>
+        <strong>Tutoraggio</strong>
+        Offriamo un servizio di tutoraggio completo che, su richiesta, permette ai tutor di collaborare direttamente con le istituzioni scolastiche per gestire al meglio il recupero e il potenziamento didattico dello studente. Questo servizio è incluso solo nei pacchetti annuali.
+      </li>
+
+      <li>
+        <strong>Supporto didattico</strong>
+        Ogni studente viene affiancato da un tutor che individua le lacune e propone un piano personalizzato di recupero. Il servizio è incluso in tutti i pacchetti.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="subjects-slider reveal" aria-label="Slider materie">
+  <div class="subjects-slider__shell">
+    <button class="subjects-slider__arrow subjects-slider__arrow--left" type="button" aria-label="Scorri a sinistra">
+      ‹
+    </button>
+
+    <div class="subjects-slider__track" id="subjectsTrack" tabindex="0" aria-label="Elenco materie">
+      <!-- ITEM (duplica/cambia) -->
+      <a class="subject-pill" href="#materia-matematica" aria-label="Matematica">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: radice -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 14l4 6 3-16h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Matematica</span>
+      </a>
+
+      <a class="subject-pill" href="#materia-inglese" aria-label="Inglese">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: fumetto EN -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 5h16v11H7l-3 3V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M8 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Inglese</span>
+      </a>
+
+      <a class="subject-pill" href="#materia-ripetizioni" aria-label="Ripetizioni">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: cappello -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3 2 8l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M6 10v6c2 2 10 2 12 0v-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Chimica</span>
+      </a>
+
+      <a class="subject-pill" href="#materia-aiuto" aria-label="Aiuto compiti">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: libro -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6 4h11a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2V4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M6 20V6a2 2 0 0 1 2-2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Aiuto compiti</span>
+      </a>
+
+      <a class="subject-pill" href="#materia-pianoforte" aria-label="Pianoforte">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: tastiera -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 7h16v10H4V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M8 7v10M12 7v10M16 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Biologia</span>
+      </a>
+
+      <a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Fisica</span>
+      </a>
+
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Diritto</span>
+      </a>
+
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Informatica</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Letteratura</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Psicologia</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Scienze umane</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Latino</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Francese</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Spagnolo</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Storia</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Filosofia</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Grammatica</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Economia</span>
+      </a>
+
+<a class="subject-pill" href="#materia-pt" aria-label="Personal trainer">
+        <span class="subject-pill__icon" aria-hidden="true">
+          <!-- Esempio SVG: manubrio -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 10V8M17 10V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5 10h14v4H5v-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9h2v6H3V9ZM19 9h2v6h-2V9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="subject-pill__label">Sceinze della terra</span>
+      </a>
+
+
+      <!-- Aggiungi altre materie duplicando gli <a class="subject-pill"> ... -->
+    </div>
+
+    <button class="subjects-slider__arrow subjects-slider__arrow--right" type="button" aria-label="Scorri a destra">
+      ›
+    </button>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<section class="installments reveal" id="rate">
+  <div class="installments-wrap">
+    <h2 class="installments-title">Decidi tu come pagare i tuoi pacchetti ore</h2>
+    <span class="installments-underline" aria-hidden="true"></span>
+
+    <div class="installments-grid">
+      <!-- Findomestic -->
+      <article class="installments-card">
+        <div class="installments-head">
+          <div class="installments-head-left">
+            <p class="installments-kicker">Pagamento in un'unica soluzione</p>
+            <h3 class="installments-brand">con carta, apple pay, google pay</h3>
+            <span class="installments-mini-underline" aria-hidden="true"></span>
+          </div>
+
+          <!-- Metti qui il tuo logo (opzionale) -->
+          <div class="installments-logo" aria-label="Logo Findomestic">
+            💳
+          </div>
+        </div>
+
+        <p class="installments-text">
+          I <strong>nostri pacchetti sono</strong> multi-materia e senza rinnovo automatico e validi fino a 9 mesi dal momento dell'acquisto. Usali come preferisci!</strong>
+        </p>
+
+        <p class="installments-text">
+          Accedi o iscriviti e <a href="#" target="_blank" rel="noopener noreferrer">acquista i pacchetti e consulta termini e condizioni</a>
+          <strong>dal tuo</strong> account.
+        </p>
+      </article>
+
+      <!-- Klarna -->
+      <article class="installments-card">
+        <div class="installments-head">
+          <div class="installments-head-left">
+            <p class="installments-kicker">Pagamento in più soluzioni con</p>
+            <h3 class="installments-brand">Klarna</h3>
+            <span class="installments-mini-underline" aria-hidden="true"></span>
+          </div>
+
+          <div class="installments-pill" aria-label="Klarna">Klarna</div>
+        </div>
+
+        <p class="installments-text">
+          Con <strong>Klarna</strong> puoi scegliere se pagare in
+          <strong>3 rate senza interessi</strong> o dilazionare il pagamento in
+          <strong>rate mensili da 6 a 12 mesi</strong>.
+        </p>
+
+        <p class="installments-text">
+          Consulta i <a href="#" target="_blank" rel="noopener noreferrer">termini e condizioni</a>
+          Klarna per requisiti, importi e approvazione.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="tb-pricing" aria-labelledby="tb-pricing-title">
+  <div class="tb-pricing__container">
+    <header class="tb-pricing__header">
+      <h2 id="tb-pricing-title" class="tb-pricing__title">Se compri a prezzo scontato sblocchi il prezzo scontato per sempre</h2>
+      <p class="tb-pricing__subtitle">Scegli il pacchetto più adatto a te.</p>
+    </header>
+
+    <div class="tb-pricing__grid">
+      <!-- CARD 1 -->
+      <article class="tb-plan">
+        <div class="tb-plan__top">
+          <div class="tb-plan__eyebrow">Pacchetto da 15 ore</div>
+          <h3 class="tb-plan__name">Basic</h3>
+          <span class="tb-plan__name-underline" aria-hidden="true"></span>
+        </div>
+
+        <div class="tb-plan__price">
+          <span class="tb-plan__price-now">375€</span>
+          <span class="tb-plan__price-was"></span>
+        </div>
+
+        <div class="tb-plan__save">prezzo pieno a <strong>25€/h</strong></div>
+
+        <a class="tb-plan__btn" href="#">
+          <span class="tb-plan__btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="tb-cart" focusable="false">
+              <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.66c.75 0 1.4-.41 1.74-1.03l3.24-5.88A1 1 0 0 0 21 5H6.21L5.77 3.35A1 1 0 0 0 4.8 2.6H2a1 1 0 1 0 0 2h2.05l2.53 9.43-.6 1.08A2 2 0 0 0 7.17 18H20a1 1 0 1 0 0-2H7.17Z"/>
+            </svg>
+          </span>
+          Acquista
+        </a>
+
+        <div class="tb-plan__divider"></div>
+
+        <div class="tb-plan__section-title">Servizi aggiuntivi inclusi</div>
+        <ul class="tb-plan__list">
+          <li><span class="tb-check" aria-hidden="true">✓</span> Assistenza · <strong>7/7</strong></li>
+          <li><span class="tb-check" aria-hidden="true">✓</span> Supporto · <strong>didattico</strong></li>
+          <li><span class="tb-check" aria-hidden="true">✓</span><strong></strong></li>
+        </ul>
+      </article>
+<!-- CARD 3 (POPOLARE) -->
+      <article class="tb-plan tb-plan--featured" aria-label="Piano più popolare">
+        <div class="tb-plan__badge">Il più popolare</div>
+
+        <div class="tb-plan__top">
+          <div class="tb-plan__eyebrow">Pacchetto da 24 ore</div>
+          <h3 class="tb-plan__name">Standard</h3>
+          <span class="tb-plan__name-underline" aria-hidden="true"></span>
+        </div>
+
+        <div class="tb-plan__price">
+          <span class="tb-plan__price-now">480€</span>
+          <span class="tb-plan__price-was">600€</span>
+        </div>
+
+        <div class="tb-plan__save">Stai risparmiando <strong>120€ (20€/h)</strong></div>
+
+        <a class="tb-plan__btn" href="#">
+          <span class="tb-plan__btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="tb-cart" focusable="false">
+              <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.66c.75 0 1.4-.41 1.74-1.03l3.24-5.88A1 1 0 0 0 21 5H6.21L5.77 3.35A1 1 0 0 0 4.8 2.6H2a1 1 0 1 0 0 2h2.05l2.53 9.43-.6 1.08A2 2 0 0 0 7.17 18H20a1 1 0 1 0 0-2H7.17Z"/>
+            </svg>
+          </span>
+          Acquista
+        </a>
+
+        <div class="tb-plan__divider"></div>
+
+        <div class="tb-plan__section-title">Servizi aggiuntivi inclusi</div>
+        <ul class="tb-plan__list">
+          <li><span class="tb-check" aria-hidden="true">✓</span> Assistenza · <strong>7/7</strong></li>
+          <li><span class="tb-check" aria-hidden="true">✓</span> Supporto · <strong>didattico</strong></li>
+          <li><span class="tb-check" aria-hidden="true">✓</span><strong></strong></li>
+        </ul>
+      </article>
+      <!-- CARD 2 -->
+      <article class="tb-plan">
+        <div class="tb-plan__top">
+          <div class="tb-plan__eyebrow">Pacchetto da 36 ore</div>
+          <h3 class="tb-plan__name">Premium</h3>
+          <span class="tb-plan__name-underline" aria-hidden="true"></span>
+        </div>
+
+        <div class="tb-plan__price">
+          <span class="tb-plan__price-now">900€</span>
+          <span class="tb-plan__price-was"></span>
+        </div>
+
+        <div class="tb-plan__save">Prezzo pieno a <strong>25€/h</strong></div>
+
+        <a class="tb-plan__btn" href="#">
+          <span class="tb-plan__btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="tb-cart" focusable="false">
+              <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.66c.75 0 1.4-.41 1.74-1.03l3.24-5.88A1 1 0 0 0 21 5H6.21L5.77 3.35A1 1 0 0 0 4.8 2.6H2a1 1 0 1 0 0 2h2.05l2.53 9.43-.6 1.08A2 2 0 0 0 7.17 18H20a1 1 0 1 0 0-2H7.17Z"/>
+            </svg>
+          </span>
+          Acquista
+        </a>
+
+        <div class="tb-plan__divider"></div>
+
+        <div class="tb-plan__section-title">Servizi aggiuntivi inclusi</div>
+        <ul class="tb-plan__list">
+          <li><span class="tb-check" aria-hidden="true">✓</span> Assistenza · <strong>7/7</strong></li>
+          <li><span class="tb-check" aria-hidden="true">✓</span> Supporto · <strong>didattico</strong></li>
+          <li><span class="tb-check" aria-hidden="true">✓</span> Servizio · <strong>Tutoraggio</strong></li>
+        </ul>
+      </article>
+
+      
+    </div>
+  </div>
+</section>
+
+<section class="faq reveal" id="faq">
+  <h2>Domande frequenti (FAQ)</h2>
+
+  <div class="faq-list">
+    <!-- 1 -->
+    <div class="faq-item">
+      <button class="faq-question" type="button">
+        <span>Come funziona TopTutor.it?</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Scegli la materia (o le materie), fai una lezione di prova, acquisti un pacchetto ore e prenoti dal calendario la
+          lezione con il tutor. Le lezioni si svolgono online su piattaforma dedicata.
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="faq-item">
+      <button class="faq-question" type="button">
+        <span>Fate anche ripetizioni in presenza?</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+           Al momento le lezioni sono online, così puoi seguire da pc/tablet/smartphone
+          con maggiore flessibilità.
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="faq-item">
+      <button class="faq-question" type="button">
+        <span>I pacchetti ore hanno una scadenza e rinnovo automatico?</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          I pacchetti non hanno rinnovo automatico e restano validi per un periodo
+          definito (es. fino a 9 mesi) dal momento dell’acquisto.
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="faq-item">
+      <button class="faq-question" type="button">
+        <span>Posso usare le ore di un pacchetto solo quando ne ho bisogno?</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Sì, puoi prenotare e utilizzare le ore quando ti servono, in base alla
+          disponibilità del calendario.
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="faq-item">
+      <button class="faq-question" type="button">
+        <span>Posso annullare o spostare una lezione già prenotata?</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Sì, puoi modificare o annullare la prenotazione.
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="faq-item">
+      <button class="faq-question" type="button">
+        <span>Le lezioni sono disponibili 7 giorni su 7?</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Sì, l’assistenza è attiva 7/7 e le lezioni sono prenotabili in base alle
+          disponibilità dei tutor.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <p>
+    © <span id="currentYear"></span> TopTutor.online — Tutti i diritti riservati.
+  </p>
+</footer>
+<script>
+  // FAQ accordion: una aperta alla volta
+  document.querySelectorAll(".faq-item .faq-question").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".faq-item");
+      const list = item.parentElement;
+
+      // chiudi le altre
+      list.querySelectorAll(".faq-item").forEach((el) => {
+        if (el !== item) el.classList.remove("is-open");
+      });
+
+      // toggle quella cliccata
+      item.classList.toggle("is-open");
+    });
+  });
+</script>
+<script>
+  (function () {
+    const track = document.getElementById("reviewsTrack");
+    if (!track) return;
+
+    const prevBtn = document.querySelector(".review-arrow.prev");
+    const nextBtn = document.querySelector(".review-arrow.next");
+
+    let index = 0;
+
+    function slidesPerView() {
+      return window.matchMedia("(max-width: 980px)").matches ? 1 : 3;
+    }
+
+    function totalSlides() {
+      return track.children.length;
+    }
+
+    function maxIndex() {
+      return Math.max(0, totalSlides() - slidesPerView());
+    }
+
+    function update() {
+      const spv = slidesPerView();
+      const pct = 100 / spv; // larghezza di una card in %
+      const translate = index * pct;
+
+      track.style.transform = `translateX(-${translate}%)`;
+
+      // abilita/disabilita frecce
+      if (prevBtn) prevBtn.disabled = index <= 0;
+      if (nextBtn) nextBtn.disabled = index >= maxIndex();
+    }
+
+    function next() {
+      index = Math.min(index + 1, maxIndex());
+      update();
+    }
+
+    function prev() {
+      index = Math.max(index - 1, 0);
+      update();
+    }
+
+    if (nextBtn) nextBtn.addEventListener("click", next);
+    if (prevBtn) prevBtn.addEventListener("click", prev);
+
+    window.addEventListener("resize", () => {
+      // se cambia layout (3->1), forza index dentro limiti
+      index = Math.min(index, maxIndex());
+      update();
+    });
+
+    update();
+  })();
+</script>
+<script>
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+</script>
+<script>
+  (function () {
+    const el = document.getElementById("rotatingSubject");
+    if (!el) return;
+
+    const subjects = [
+      "Matematica",
+      "Fisica",
+      "Chimica",
+      "Biologia",
+      "Inglese",
+      "Italiano",
+      "Storia",
+      "Filosofia",
+      "Informatica",
+      "Economia",
+      "Diritto",
+      "Disegno",
+    ];
+
+    let i = 0;
+
+    function setSubject(text) {
+      el.classList.remove("fade-in");
+      el.classList.add("fade-out");
+
+      setTimeout(() => {
+        el.textContent = `"${text}"`;
+        el.classList.remove("fade-out");
+        el.classList.add("fade-in");
+      }, 180);
+    }
+
+    // iniziale
+    setSubject(subjects[i]);
+
+    setInterval(() => {
+      i = (i + 1) % subjects.length;
+      setSubject(subjects[i]);
+    }, 1500);
+  })();
+</script>
+<script>
+  (function () {
+    const items = document.querySelectorAll(".reveal, .reveal-left");
+    if (!items.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target); // anima una sola volta
+        });
+      },
+      {
+        threshold: 0.12, // quanto deve entrare in viewport
+        rootMargin: "0px 0px -10% 0px", // parte un po' prima
+      }
+    );
+
+    items.forEach((el) => observer.observe(el));
+  })();
+</script>
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite">
+  <div class="cookie-content">
+    <div class="cookie-text">
+      Utilizziamo cookie tecnici e, previo tuo consenso, cookie di analisi e marketing
+      per migliorare l’esperienza di navigazione.
+      <br />
+      Puoi accettare tutti i cookie, rifiutarli o gestire le tue preferenze.
+      <a href="#" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+    </div>
+
+    <div class="cookie-actions">
+      <button class="cookie-btn reject" id="cookieReject">Rifiuta</button>
+      <button class="cookie-btn settings" id="cookieSettings">Personalizza</button>
+      <button class="cookie-btn accept" id="cookieAccept">Accetta</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    const banner = document.getElementById("cookieBanner");
+    if (!banner) return;
+
+    const consentKey = "toptutor_cookie_consent";
+
+    const savedConsent = localStorage.getItem(consentKey);
+    if (!savedConsent) {
+      banner.classList.add("is-visible");
+    }
+
+    function saveConsent(value) {
+      localStorage.setItem(consentKey, value);
+      banner.classList.remove("is-visible");
+    }
+
+    document.getElementById("cookieAccept").addEventListener("click", () => {
+      saveConsent("accepted");
+      // qui in futuro puoi attivare analytics/marketing
+    });
+
+    document.getElementById("cookieReject").addEventListener("click", () => {
+      saveConsent("rejected");
+    });
+
+    document.getElementById("cookieSettings").addEventListener("click", () => {
+      alert(
+        "Qui potrai inserire una gestione avanzata dei cookie (analytics / marketing)."
+      );
+    });
+  })();
+</script>
+<script>
+  (function () {
+    const header = document.getElementById("siteHeader");
+    const burger = document.getElementById("burgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    if (!header || !burger || !mobileMenu) return;
+
+    function closeMenu() {
+      header.classList.remove("menu-open");
+      burger.setAttribute("aria-expanded", "false");
+      mobileMenu.setAttribute("aria-hidden", "true");
+    }
+
+    function toggleMenu() {
+      const open = header.classList.toggle("menu-open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+
+    burger.addEventListener("click", toggleMenu);
+
+    // Chiudi quando clicchi un link nel menu mobile
+    mobileMenu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+
+    // Chiudi con ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // Chiudi se torni a desktop (resize)
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  })();
+</script>
+<script>
+  (function () {
+    const track = document.getElementById("subjectsTrack");
+    if (!track) return;
+
+    const left = document.querySelector(".subjects-slider__arrow--left");
+    const right = document.querySelector(".subjects-slider__arrow--right");
+
+    function updateArrows() {
+      const maxScrollLeft = track.scrollWidth - track.clientWidth;
+      const x = track.scrollLeft;
+
+      if (left) left.disabled = x <= 2;
+      if (right) right.disabled = x >= maxScrollLeft - 2;
+    }
+
+    function scrollByAmount(dir) {
+      // scorre circa 3 pill per volta (adatta se vuoi)
+      const amount = Math.min(track.clientWidth * 0.6, 520);
+      track.scrollBy({ left: dir * amount, behavior: "smooth" });
+    }
+
+    left && left.addEventListener("click", () => scrollByAmount(-1));
+    right && right.addEventListener("click", () => scrollByAmount(1));
+
+    track.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+
+    // init
+    updateArrows();
+  })();
+</script>
+
+</body>
+</html>
