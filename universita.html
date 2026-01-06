@@ -1,0 +1,2407 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="fav/favicon.ico.png" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Università - TopTutor</title>
+
+    <style>
+      :root {
+        --navy: #16163f;
+        --purple: #f7c7d6;
+        --bg1: #f7c7d6;
+        --bg2: #f7c7d6;
+        --muted: rgba(22, 22, 63, 0.72);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--navy);
+        background: #fff;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      /* ===== NAVBAR (uguale home) ===== */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(8px);
+        transition: background 180ms ease;
+      }
+      .site-header.is-scrolled { background: rgba(255, 255, 255, 0.3); }
+
+      .navbar {
+        height: 72px;
+        padding: 0 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo img { height: 125px; display: block; }
+
+      .menu {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .menu-link.active { color: var(--purple); }
+
+      .app-btn {
+        background: rgb(242, 241, 241);
+        color: #000000;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+
+      /* ===== NAVBAR + HAMBURGER (uguale home) ===== */
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .burger {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      .burger span {
+        display: block;
+        height: 2px;
+        background: var(--navy);
+        margin: 6px 0;
+        border-radius: 2px;
+        transition: transform 200ms ease, opacity 200ms ease;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 14px 16px 18px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(22, 22, 63, 0.12);
+      }
+
+      .mobile-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        gap: 12px;
+        padding: 8px 2px;
+      }
+
+      .mobile-link {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--navy);
+        padding: 12px 10px;
+        border-radius: 12px;
+      }
+
+      .mobile-link:hover { background: rgba(22, 22, 63, 0.06); }
+
+      .app-mobile {
+        display: inline-flex;
+        justify-content: center;
+        margin-top: 6px;
+        width: fit-content;
+      }
+
+      .site-header.menu-open .mobile-menu { display: block; }
+
+      .site-header.menu-open .burger span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .site-header.menu-open .burger span:nth-child(2) { opacity: 0; }
+      .site-header.menu-open .burger span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      @media (max-width: 900px) {
+        .navbar { padding: 0 16px; }
+
+        .menu-desktop { display: none; }
+        .app-desktop { display: none; }
+
+        .burger { display: inline-block; }
+
+        .logo img { height: 86px; width: auto; }
+        .navbar { height: 72px; }
+      }
+
+      /* ===== HERO (stessa struttura home) ===== */
+      .hero {
+        min-height: 88vh;
+        background: radial-gradient(1200px 520px at 50% 110%, var(--bg2) 0%, var(--bg1) 52%, #ffffff 100%);
+        text-align: center;
+        padding: 140px 20px 90px;
+      }
+
+      .hero h1 {
+        margin: 0 0 18px 0;
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+
+      .hero p {
+        margin: 0 auto 26px;
+        max-width: 860px;
+        font-size: 20px;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        .hero h1 { font-size: 42px; }
+      }
+
+      /* ===== BARRA ANIMATA (uguale home) ===== */
+      .animated-bar {
+        max-width: 980px;
+        margin: 34px auto 0;
+        padding: 14px;
+        border-radius: 999px;
+        background: #f7c7d6;
+      }
+
+      .animated-bar .inner {
+        background: #fffeff;
+        border-radius: 999px;
+        padding: 16px 18px;
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 10px 22px rgba(22, 22, 63, 0.08);
+      }
+
+      .animated-bar .icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: rgba(22, 22, 63, 0.12);
+        color: #120b56;
+      }
+
+      .animated-bar .icon svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
+
+      .animated-bar .text {
+        font-size: 22px;
+        color: rgba(22, 22, 63, 0.92);
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .animated-bar .text .prefix {
+        opacity: 0.85;
+        font-weight: 500;
+      }
+
+      .animated-bar .text .subject { font-weight: 900; }
+
+      .animated-bar .btn {
+        background: #f7c7d6;
+        color: #040404;
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 26px;
+        font-weight: 800;
+        font-size: 18px;
+      }
+
+      .subject.fade-out {
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .subject.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      @media (max-width: 900px) {
+        .animated-bar .text { font-size: 18px; }
+        .animated-bar .btn { font-size: 16px; padding: 10px 18px; }
+      }
+
+      @media (max-width: 720px) {
+        .animated-bar { padding: 14px; }
+
+        .animated-bar .inner {
+          grid-template-columns: 40px 1fr;
+          gap: 12px;
+        }
+
+        /* bottone dentro la barra sparisce */
+        .animated-bar .btn { display: none; }
+
+        /* stessa UI della home (estetica), ma non cliccabile */
+        .animated-bar::after {
+          content: "Prova a soli 15€";
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          margin: 14px auto 0;
+          padding: 12px 26px;
+          background: #ffffff;
+          color: #040404;
+          font-weight: 800;
+          font-size: 16px;
+          border-radius: 999px;
+        }
+      }
+
+      /* CTA reale cliccabile su mobile (al posto del ::after) */
+      .mobile-cta {
+        display: none;
+        margin: 14px auto 0;
+        padding: 12px 26px;
+        background: #ffffff;
+        color: #040404;
+        font-weight: 800;
+        font-size: 16px;
+        border-radius: 999px;
+        width: fit-content;
+      }
+
+      @media (max-width: 720px) {
+        .mobile-cta { display: inline-flex; }
+      }
+
+      /* ====== PRICING / PIANI (uguale home) ====== */
+      .tb-pricing {
+        padding: clamp(28px, 4vw, 64px) 0;
+        background: #ffffff;
+      }
+
+      .tb-pricing__container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .tb-pricing__header { margin-bottom: 18px; }
+
+      .tb-pricing__title {
+        margin: 0 0 6px 0;
+        font-size: clamp(22px, 3vw, 34px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #0b0b0f;
+      }
+
+      .tb-pricing__subtitle {
+        margin: 0;
+        color: #6b7280;
+        font-size: 14px;
+      }
+
+      .tb-pricing__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(14px, 2vw, 22px);
+        align-items: stretch;
+      }
+
+      .tb-plan {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid #f0d6d6;
+        border-radius: 22px;
+        padding: 26px 26px 22px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        overflow: hidden;
+      }
+
+      .tb-plan--featured {
+        background: #fde8e6;
+        border-color: #fde8e6;
+      }
+
+      .tb-plan__badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: #ff3b0a;
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 12px;
+        padding: 10px 14px;
+        border-radius: 999px;
+      }
+
+      .tb-plan__top { padding-top: 6px; }
+
+      .tb-plan__eyebrow {
+        font-size: 14px;
+        color: #111827;
+        font-weight: 600;
+        opacity: 0.9;
+      }
+
+      .tb-plan__name {
+        margin: 6px 0 6px 0;
+        font-size: clamp(26px, 2.6vw, 34px);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        color: #0b0b0f;
+      }
+
+      .tb-plan__name-underline {
+        display: inline-block;
+        width: 22px;
+        height: 3px;
+        border-radius: 999px;
+        background: #0b0b0f;
+      }
+
+      .tb-plan__price {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .tb-plan__price-now {
+        font-size: clamp(34px, 3.2vw, 44px);
+        font-weight: 900;
+        color: #0b0b0f;
+        letter-spacing: -0.02em;
+      }
+
+      .tb-plan__price-was {
+        font-size: 18px;
+        color: #6b7280;
+        text-decoration: line-through;
+      }
+
+      .tb-plan__save {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #0b0b0f;
+        font-weight: 600;
+      }
+
+      .tb-plan__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+        padding: 14px 18px;
+        border-radius: 999px;
+        background: #1f2330;
+        color: #ffffff;
+        font-weight: 800;
+        text-decoration: none;
+        width: fit-content;
+      }
+
+      .tb-plan__btn:hover { filter: brightness(1.05); }
+
+      .tb-plan__btn-icon {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+      }
+
+      .tb-cart { width: 22px; height: 22px; }
+
+      .tb-plan__divider {
+        height: 1px;
+        background: rgba(17, 24, 39, 0.15);
+        margin: 20px 0 18px;
+      }
+
+      .tb-plan__section-title {
+        font-weight: 900;
+        color: #0b0b0f;
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+
+      .tb-plan__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .tb-plan__list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        color: #111827;
+        font-size: 16px;
+        line-height: 1.3;
+      }
+
+      .tb-check {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #1f2330;
+        color: #ffffff;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        flex: 0 0 auto;
+      }
+
+      @media (max-width: 980px) {
+        .tb-pricing__grid { grid-template-columns: 1fr; }
+        .tb-plan { padding: 22px 20px 18px; }
+      }
+
+      /* ===== FOOTER (uguale home) ===== */
+      .site-footer {
+        background: #fffdfe;
+        color: rgb(0, 0, 0);
+        padding: 26px 20px;
+        text-align: center;
+      }
+
+      .site-footer p {
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+      }
+      /* ====== GOOGLE REVIEWS SECTION ====== */
+.gr {
+  padding: clamp(22px, 4vw, 56px) 0;
+  background: #ffffff;
+}
+
+.gr__container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.gr__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.gr__title {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0b0b0f;
+}
+
+.gr__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.gr__stars {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #f4b400; /* giallo stelle */
+  line-height: 1;
+}
+
+.gr__meta-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.gr__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.gr__cta:hover {
+  background: #f9fafb;
+}
+
+.gr__g-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 13px;
+  color: #111827;
+  background: #f3f4f6;
+}
+
+/* Chips */
+.gr__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 18px;
+}
+
+.gr__chip {
+  appearance: none;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #6b7280;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.gr__chip:hover {
+  background: #f9fafb;
+  color: #374151;
+}
+
+/* Carousel layout */
+.gr__carousel {
+  position: relative;
+  border-radius: 18px;
+}
+
+.gr__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 16px;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 42px; /* spazio per frecce */
+  scrollbar-width: none; /* Firefox */
+}
+
+.gr__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Nav buttons */
+.gr__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+
+.gr__nav--left { left: 6px; }
+.gr__nav--right { right: 6px; }
+
+.gr__nav:hover {
+  background: #f9fafb;
+}
+
+/* Card base */
+.gr-card {
+  scroll-snap-align: start;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  min-height: 190px;
+}
+
+.gr-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.gr-card__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.gr-card__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  flex: 0 0 auto;
+}
+
+
+/* css in Aggiunta iniziali avatar review */
+
+.gr-card__avatar--initials{
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #111827;
+  background: #e5e7eb; /* puoi cambiarlo se vuoi */
+  text-transform: uppercase;
+}
+
+
+
+.gr-card__user-meta {
+  min-width: 0;
+}
+
+.gr-card__name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #111827;
+}
+
+.gr-card__time {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.gr-card__google {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;
+  font-weight: 800;
+  flex: 0 0 auto;
+}
+
+.gr-card__stars {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #f4b400;
+  margin-bottom: 10px;
+}
+
+.gr-card__text {
+  margin: 0 0 10px 0;
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.gr-card__link {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+}
+
+.gr-card__link:hover {
+  text-decoration: underline;
+}
+
+/* Summary card (gradient like screenshot) */
+.gr-card--summary {
+  border: none;
+  background: linear-gradient(135deg, #d9f1ff 0%, #f6d8ff 55%, #ffe6d0 100%);
+}
+
+.gr-card__summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.gr-card__summary-title {
+  font-weight: 800;
+  color: #111827;
+}
+
+/* Summary footer avatars */
+.gr-card__footer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gr-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.gr-avatars__img {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.12);
+  border: 2px solid rgba(255,255,255,0.9);
+  margin-left: -8px;
+}
+
+.gr-avatars__img:first-child {
+  margin-left: 0;
+}
+
+.gr-avatars__more {
+  width: 34px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(17, 24, 39, 0.18);
+  color: #111827;
+  font-weight: 800;
+  font-size: 12px;
+  border: 2px solid rgba(255,255,255,0.9);
+  margin-left: -8px;
+}
+
+.gr-card__footnote {
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.75);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .gr__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gr__track {
+    padding: 6px 0;
+  }
+
+  .gr__nav {
+    display: none;
+  }
+}
+
+/* ===== SEZIONE SPLIT (testo + immagine) ===== */
+.feature-split {
+  padding: 5px 20px;
+  background: #fff;
+}
+
+.feature-split__container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.feature-split__badge {
+  display: inline-block;
+  background: #ffe48c;
+  color: #14153a;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.feature-split__title {
+  margin: 0 0 22px 0;
+  font-size: 56px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.feature-split__highlight {
+  color: #f7c7d6; /* blu come esempio */
+}
+
+.feature-split__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px 0;
+  display: grid;
+  gap: 18px;
+  color: rgba(22, 22, 63, 0.88);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.feature-split__list li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.feature-split__check {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #2a2a2a;
+  color: #e4e4e4;
+  font-weight: 900;
+  margin-top: 2px;
+}
+
+.feature-split__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.feature-split__link:hover {
+  text-decoration: underline;
+}
+
+.feature-split__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .feature-split__container {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .feature-split__title {
+    font-size: 38px;
+  }
+
+  .feature-split__list {
+    font-size: 16px;
+  }
+}
+   
+  /* ===== UNIVERSITÀ: SEZIONE ANTEPRIMA CONTENUTI ===== */
+.uni-preview {
+  padding: 34px 20px 20px;
+  background: #fff;
+}
+
+.uni-preview__wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Tabs (categorie) */
+.uni-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.uni-tab {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #1f2330;
+  border: 1px solid rgba(22, 22, 63, 0.10);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+  cursor: pointer;
+  user-select: none;
+}
+
+.uni-tab__icon {
+  width: 56px;
+  height: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 0 0 auto;
+  background: #f3f4f6;
+  display: grid;
+  place-items: center;
+}
+
+.uni-tab__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.uni-tab__label {
+  font-weight: 800;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.uni-tab.is-active {
+  background: #1f2330; /* blu come screenshot */
+  border-color: #f0d6d6;
+  color: #fff;
+}
+
+.uni-tab.is-active .uni-tab__label {
+  color: #fff;
+}
+
+/* Card grande + carousel */
+.uni-panel {
+  border-radius: 18px;
+  background: #f0d6d6;
+  padding: 26px 26px 22px;
+  overflow: hidden;
+}
+
+.uni-panel__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.35fr;
+  gap: 26px;
+  align-items: start;
+}
+
+/* Left text */
+.uni-panel__title {
+  margin: 0 0 10px 0;
+  font-size: 44px;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  color: #171717;
+}
+
+.uni-panel__title .hl {
+  color: #171717; /* giallino evidenza */
+}
+
+.uni-panel__subtitle {
+  margin: 0 0 20px 0;
+  color: rgba(46, 46, 46, 0.86);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 42ch;
+}
+
+.uni-panel__meta {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  margin-top: 18px;
+  color: rgba(41, 40, 40, 0.92);
+  font-weight: 700;
+}
+
+.uni-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.uni-meta-item svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  color: rgba(34, 34, 34, 0.95);
+}
+
+/* Right cards carousel */
+.uni-cards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(180px, 1fr);
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.uni-cards::-webkit-scrollbar { display: none; }
+
+.uni-card {
+  scroll-snap-align: start;
+  min-width: 180px;
+  color: #353535;
+}
+
+.uni-cover {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.uni-cover img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.uni-card__name {
+  margin: 12px 0 6px 0;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.uni-card__desc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(27, 27, 27, 0.78);
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .uni-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .uni-panel__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .uni-panel__title {
+    font-size: 34px;
+  }
+
+  .uni-cover img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 520px) {
+  .uni-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .uni-tab__label {
+    font-size: 16px;
+  }
+}
+ 
+   /* ===== SEZIONE RATE (FINDOMESTIC + KLARNA) ===== */
+.installments{
+  padding: 90px 20px 90px;
+  background: #fff;
+  text-align: left;
+}
+
+.installments-wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.installments-title{
+  margin: 0;
+  font-size: 46px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.installments-underline{
+  display: inline-block;
+  width: 42px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--navy);
+  margin-top: 14px;
+}
+
+.installments-grid{
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.installments-card{
+  border: 1px solid rgba(22, 22, 63, 0.14);
+  border-radius: 26px;
+  padding: 28px 30px;
+  background: #fff;
+}
+
+.installments-head{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.installments-kicker{
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(22, 22, 63, 0.9);
+}
+
+.installments-brand{
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.installments-mini-underline{
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--navy);
+  margin-top: 10px;
+}
+
+.installments-text{
+  margin: 0 0 18px 0;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(22, 22, 63, 0.88);
+}
+
+.installments-text a{
+  color: var(--navy);
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+/* "Logo" (placeholder) Findomestic */
+.installments-logo{
+  font-size: 14px;
+  font-weight: 800;
+  color: rgba(22, 22, 63, 0.7);
+  padding-top: 6px;
+  white-space: nowrap;
+}
+
+/* Pill Klarna */
+.installments-pill{
+  background: #ffd0df;
+  color: #1b0b12;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .installments-title{
+    font-size: 34px;
+  }
+
+  .installments-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .installments-card{
+    padding: 22px 20px;
+    border-radius: 22px;
+  }
+
+  .installments-kicker{
+    font-size: 16px;
+  }
+
+  .installments-text{
+    font-size: 16px;
+  }
+}
+
+/* ====== WHY SECTION ====== */
+.tb-why {
+  padding: clamp(28px, 4vw, 56px) 0;
+}
+
+.tb-why__container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.tb-why__header {
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.tb-why__title {
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #0b0b0f;
+}
+
+.tb-why__underline {
+  display: inline-block;
+  width: 44px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: #0b0b0f;
+}
+
+/* Grid cards */
+.tb-why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+}
+
+/* Card */
+.tb-card {
+  position: relative;
+  border-radius: 18px;
+  padding: clamp(18px, 2.2vw, 26px);
+  background: #1f2330; /* blu notte */
+  color: #ffffff;
+  overflow: hidden;
+  min-height: 140px;
+}
+
+/* Subtle highlight to resemble UI card */
+.tb-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 400px at 20% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.tb-card__icon {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  opacity: 0.9;
+}
+
+.tb-icon {
+  width: 34px;
+  height: 34px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Text styles */
+.tb-card__kicker {
+  margin: 0 0 12px 0;
+  font-weight: 900;
+  font-size: clamp(18px, 1.8vw, 30px);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.tb-card__big {
+  margin: 0 0 12px 0;
+  font-weight: 900;
+  font-size: clamp(28px, 2.8vw, 44px);
+  letter-spacing: 0.01em;
+}
+
+.tb-card__text {
+  margin: 0;
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.35;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .tb-why__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tb-card {
+    min-height: auto;
+  }
+}
+   </style>
+  </head>
+
+  <body>
+    <header class="site-header" id="siteHeader">
+      <nav class="navbar" aria-label="Barra di navigazione">
+        <a class="logo" href="index.html">
+          <img src="img/logo.png" alt="Logo" />
+        </a>
+
+        <div class="menu menu-desktop" aria-label="Menu principale">
+          <a class="menu-link" href="index.html">Ripetizioni</a>
+          <a class="menu-link active" href="universita.html">Università</a>
+          <a class="menu-link" href="prenota.html">Prenota</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="app-btn app-desktop" href="https://toptutor.cloud" target="_blank" rel="noopener noreferrer">
+            Organizza il tuo studio
+          </a>
+
+          <button
+            class="burger"
+            id="burgerBtn"
+            type="button"
+            aria-label="Apri menu"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-inner">
+          <a class="mobile-link" href="index.html">Ripetizioni</a>
+          <a class="mobile-link" href="universita.html">Università</a>
+          <a class="mobile-link" href="prenota.html">Prenota</a>
+
+          <a class="app-btn app-mobile" href="https://toptutor.cloud" target="_blank" rel="noopener noreferrer">
+            Organizza il tuo studio
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO come home -->
+      <section class="hero">
+        <h1>Semestre filtro con toptutor.it</h1>
+        <p>Corso completo + manuali + quiz</p>
+
+        <!-- Barra animata identica -->
+        <div class="animated-bar" aria-label="Barra animata materie università">
+          <div class="inner">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 3h7l3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path d="M14 3v4a2 2 0 0 0 2 2h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+            </div>
+
+            <div class="text">
+              <span class="prefix">Prova</span>
+              <span class="subject fade-in" id="rotatingSubject">"Biologia"</span>
+            </div>
+
+            <a href="prenota.html" class="btn" aria-label="Vai alla pagina Prenota">
+              Prova a soli 15€
+            </a>
+          </div>
+
+          <!-- CTA reale cliccabile su mobile -->
+           <!--<a class="mobile-cta" href="prenota.html" aria-label="Vai alla pagina Prenota (mobile)">
+            Prova a soli 15€
+          </a>-->
+        </div>
+      </section>
+
+
+<section class="uni-preview" aria-label="Anteprima contenuti Università">
+  <div class="uni-preview__wrap">
+
+    <!-- CATEGORIE -->
+    <div class="uni-tabs" role="tablist" aria-label="Categorie contenuti">
+      <div class="uni-tab is-active" role="tab" aria-selected="true">
+        <div class="uni-tab__icon">
+          <img src="img/ore.png" alt="" />
+        </div>
+        <div class="uni-tab__label">+10000 ore di insegnamento</div>
+      </div>
+
+      <div class="uni-tab" role="tab" aria-selected="false">
+        <div class="uni-tab__icon">
+          <img src="img/doc.png" alt="" />
+        </div>
+        <div class="uni-tab__label">+30 docenti</div>
+      </div>
+
+      <div class="uni-tab" role="tab" aria-selected="false">
+        <div class="uni-tab__icon">
+          <img src="img/stud.png" alt="" />
+        </div>
+        <div class="uni-tab__label">+500 studenti</div>
+      </div>
+
+      <div class="uni-tab" role="tab" aria-selected="false">
+        <div class="uni-tab__icon">
+          <img src="img/piat.png" alt="" />
+        </div>
+        <div class="uni-tab__label">Piattaforma dedicata</div>
+      </div>
+    </div>
+
+    <!-- PANEL BLU -->
+    <div class="uni-panel">
+      <div class="uni-panel__grid">
+        <!-- LEFT -->
+        <div>
+          <h2 class="uni-panel__title">
+           Preparati con i nostri manuali di <span class="hl">Teoria</span>
+          </h2>
+          <p class="uni-panel__subtitle">
+            Studia da solo o abbinali al corso "sprint" 60 ore "tutto incluso". I libri e il corso sono stati progettati da studenti di medicina di diverse università Italiane. Vieni a conoscerli al nostro webinar gratuito sabato 27 giugno 2026!
+          </p>
+
+          <div class="uni-panel__meta" aria-label="Statistiche contenuti">
+            <div class="uni-meta-item">
+              <!-- icona "moduli" -->
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="2" />
+                <path d="M4 10V4h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M20 14v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>60 ore di teoria</span>
+            </div>
+
+            <div class="uni-meta-item">
+              <!-- icona "libro" -->
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 4h10a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2V4Z" stroke="currentColor" stroke-width="2" />
+                <path d="M6 20V6a2 2 0 0 1 2-2" stroke="currentColor" stroke-width="2" />
+              </svg>
+              <span>3 manuali + quiz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: CARDS -->
+        <div class="uni-cards" aria-label="Contenuti in evidenza">
+          <article class="uni-card">
+            <div class="uni-cover">
+              <img src="img/book-1.png" alt="Copertina contenuto 1" loading="lazy">
+            </div>
+            <div class="uni-card__name">Biologia 15 ore di corso</div>
+            <p class="uni-card__desc">Vedi l'anteprima</p>
+          </article>
+
+          <article class="uni-card">
+            <div class="uni-cover">
+              <img src="img/book-2.png" alt="Copertina contenuto 2" loading="lazy">
+            </div>
+            <div class="uni-card__name">Chimica 20 ore di corso</div>
+            <p class="uni-card__desc">Vedi l'anteprima</p>
+          </article>
+
+          <article class="uni-card">
+            <div class="uni-cover">
+              <img src="img/book-3.png" alt="Copertina contenuto 3" loading="lazy">
+            </div>
+            <div class="uni-card__name">Fisica 25 ore di corso</div>
+            <p class="uni-card__desc">Vedi l'anteprima</p>
+          </article>
+
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!--<section class="tb-why reveal" aria-labelledby="tb-why-title">
+  <div class="tb-why__container">
+    <header class="tb-why__header">
+      <h2 id="tb-why-title" class="tb-why__title">Perchè scegliere toptutor</h2>
+      <span class="tb-why__underline" aria-hidden="true"></span>
+    </header>
+
+    <div class="tb-why__grid">
+       CARD 1 
+      <article class="tb-card">
+        <div class="tb-card__icon" aria-hidden="true">
+           Icona "presentazione" (SVG inline) 
+          <svg viewBox="0 0 24 24" class="tb-icon" role="img" focusable="false">
+            <path
+              fill="currentColor"
+              d="M4 4h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H13v2h3a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h3v-2H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v8h14V6H5Z"
+            />
+          </svg>
+        </div>
+
+        <h3 class="tb-card__kicker">+10000</h3>
+        <p class="tb-card__text">
+        Ore di insegnamento effettuate
+        </p>
+      </article> -->
+
+      <!-- CARD 2 
+      <article class="tb-card">
+        <div class="tb-card__icon" aria-hidden="true">-->
+          <!-- Icona "refresh" (SVG inline) 
+          <svg viewBox="0 0 24 24" class="tb-icon" role="img" focusable="false">
+            <path
+              fill="currentColor"
+              d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5a5 5 0 1 1-8.66-3.54 1 1 0 0 0-1.5-1.32A7 7 0 1 0 12 6Z"
+            />
+          </svg>
+        </div>
+
+        <div class="tb-card__big">+30</div>
+        <p class="tb-card__text">
+          Docenti, tutti laureandi e laureati
+        </p>
+      </article>-->
+
+      <!-- CARD 3 
+      <article class="tb-card">
+        <div class="tb-card__icon" aria-hidden="true">
+           Icona "utenti" (SVG inline) 
+          <svg viewBox="0 0 24 24" class="tb-icon" role="img" focusable="false">
+            <path
+              fill="currentColor"
+              d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-8 2a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm8 2c-3.33 0-6 1.34-6 3v2h12v-2c0-1.66-2.67-3-6-3ZM8 15c-3.33 0-6 1.34-6 3v2h6v-2c0-1.21.64-2.29 1.72-3.08A9.2 9.2 0 0 0 8 15Z"
+            />
+          </svg>
+        </div>
+
+        <div class="tb-card__big">+500</div>
+        <p class="tb-card__text">Studenti</p>
+      </article>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="feature-split reveal" aria-label="Sezione contenuti e app">
+  <div class="feature-split__container">
+    <!-- SINISTRA: TESTO -->
+    <div class="feature-split__content">
+      <span class="feature-split__badge">Lezioni live e interattive</span>
+
+      <h2 class="feature-split__title">
+        Corso 60 ore<br />
+        <span class="feature-split__highlight">Tutto incluso</span><br />
+      </h2>
+
+      <ul class="feature-split__list">
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          Durata corso: inizia il 1 luglio e finisce il 30 agosto
+        </li>
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          Orari corso: Tutti i sabati e le domeniche dalle 9 alle 14
+        </li>
+        <li>
+          <span class="feature-split__check" aria-hidden="true">✓</span>
+          Possibilità da subito di fare una lezione di prova
+        </li>
+      </ul>
+      <a class="feature-split__link" href="prenota.html">
+        Fai una lezione di prova a 15€ e se ti piace prenota il tuo posto <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- DESTRA: IMMAGINE -->
+    <div class="feature-split__media">
+      <img
+        src="img/platform-1.png"
+        alt="Anteprima app e contenuti"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+
+
+      <section class="gr reveal" aria-labelledby="gr-title">
+  <div class="gr__container">
+    <!-- Header -->
+    <header class="gr__header">
+      <div class="gr__header-left">
+        <h2 id="gr-title" class="gr__title">Leggi cosa dicono di noi i nostri studenti</h2>
+
+        <div class="gr__meta" aria-label="Google rating summary">
+          <div class="gr__stars" aria-hidden="true">
+            ★★★★★
+          </div>
+          <div class="gr__meta-text">4.9 rating of Google reviews</div>
+        </div>
+      </div>
+
+      <a class="gr__cta" href="https://g.page/r/CeTOFbMz6GnEEBM/review" target="_blank" rel="noopener">
+        <span class="gr__g-badge" aria-hidden="true">G</span>
+        Lasciaci una recensione!
+      </a>
+    </header>
+
+    <!-- Chips -->
+    <div class="gr__chips" aria-label="Review topics">
+      <button class="gr__chip" type="button">online</button>
+      <button class="gr__chip" type="button">qualità</button>
+      <button class="gr__chip" type="button">Tutor</button>
+      <button class="gr__chip" type="button">DSA</button>
+      <button class="gr__chip" type="button">Passione</button>
+      <button class="gr__chip" type="button">Smart</button>
+      <button class="gr__chip" type="button">Top</button>
+      <button class="gr__chip" type="button">Grazie</button>
+      <button class="gr__chip" type="button">Aiuto compiti</button>
+      <button class="gr__chip" type="button">Tutoraggio</button>
+    </div>
+
+    <!-- Carousel -->
+    <div class="gr__carousel" role="region" aria-label="Google reviews carousel">
+      <button class="gr__nav gr__nav--left" type="button" aria-label="Previous reviews">‹</button>
+
+      <div class="gr__track" id="gr-track">
+        <!-- Card 1: Social proof summary -->
+        <article class="gr-card gr-card--summary" tabindex="0">
+          <div class="gr-card__summary-head">
+            <div class="gr-card__summary-title">Sommario recensioni</div>
+          </div>
+
+          <p class="gr-card__text">
+            Le recensioni esprimono una valutazione complessivamente molto positiva del servizio, con ricorrenza di alcuni elementi chiave: qualità didattica, organizzazione del servizio, disponibilità, supporto e sddisfazione complessiva.
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+
+          <div class="gr-card__footer">
+            <div class="gr-avatars" aria-hidden="true">
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__img"></span>
+              <span class="gr-avatars__more">+30</span>
+            </div>
+            <div class="gr-card__footnote">Basato su +100 recensioni</div>
+          </div>
+        </article>
+
+
+<!-- Card 15 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">B</span>
+              <div class="gr-card__user-meta">
+                <div class="gr-card__name">Barbara</div>
+                <div class="gr-card__time">5 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Non è da molto che abbiamo conosciuto questo team, ma devo dire che i ragazzi che lavorano sono preparati spiegano in maniera eccellente anche se le lezioni sono online sono super organizzati e mio figlio non ha trovato nessuna difficoltà nel seguire la lezione. È facile iscriversi e cmq se hai un problema sono sempre disponibili ad aiutarti.
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 14 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">R</span>
+                <div class="gr-card__user-meta">
+                <div class="gr-card__name">Roberta</div>
+                <div class="gr-card__time">6 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Veramente bravi e la loro disponibilità eccezionale li consiglio, mio figlio ha avuto miglioramenti
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+<!-- Card 13 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">A</span>
+                 <div class="gr-card__user-meta">
+                <div class="gr-card__name">Alessandra</div>
+                <div class="gr-card__time">7 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+           Super disponibili, fanno di tutto per riuscire a venire incontro alle esigenze e difficoltà dei ragazzi. Altamente consigliati.
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 12 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">F</span>
+                <div class="gr-card__user-meta">
+                <div class="gr-card__name">Francesca</div>
+                <div class="gr-card__time">7 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ripetizioni di fisica docente molto valido e chiaro nella spiegazione, il supporto tecnico è sempre molto disponibile e ti aiuta per qualsiasi cosa, consigliato
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 11 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">A</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Aldo</div>
+                <div class="gr-card__time">7 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ottimi tutor, molto preparati, disponibili e chiari nelle spiegazioni. Grazie a loro il mio rendimento scolastico è migliorato.
+Lo consiglio VIVAMENTE.
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 10 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">S</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Silva</div>
+                <div class="gr-card__time">8 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Esperienza super positiva,tutor molto bravo e spiegazioni comprensibili, chiare ed efficaci. Ottimo progetto creato da ragazzi giovani ,preparati e disponibili. Un vero e proprio paracadute "salva anno scolastico" !! Stra consigliato 👏🏽
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 9 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">F</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Francesca</div>
+                <div class="gr-card__time">9 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Insegnati ben preparati e disponibili, anche l'assistenza super efficiente. Consigliatissimo!
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+
+<!-- Card 8 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">A</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Alessandro</div>
+                <div class="gr-card__time">1 anno fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Sono molto colpito dall' organizzazione e dalla disponibilità data dall' organizzatore e dagli insegnanti.
+Sempre molto gentili e pronti ad aiutare, lezioni utili e funzionali adatti all'apprendimento , consiglio vivamente.
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 7 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">R</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Roxana</div>
+                <div class="gr-card__time">1 anno fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Professionali e disponibililissimi, Giovanni si sta trovando molto bene .Grazie
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 6 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">C</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Cinzia</div>
+                <div class="gr-card__time">2 anni fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ho iniziato da poco il mio percorso universitario con Top Tutor e sono davvero soddisfatta!!
+Fin dal primo contatto il team è stato disponibile e professionale.Un ringraziamento speciale va al mio Tutor Emmanuel,molto preparato e attento.Sin dalla prima lezione ho notato un miglioramento nella comprensione degli argomenti e una maggiore fiducia nelle mie capacità.
+Consiglio questo servizio a chiunque voglia un supporto serio ed efficace nello studio!
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+<!-- Card 5 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">A</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Alessia</div>
+                <div class="gr-card__time">2 anni fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Ottimo servizio! Gli insegnanti sono competenti, disponibili e spiegano in modo chiaro ed efficace. La piattaforma è intuitiva e comoda per prenotare le lezioni.
+Lo consiglio vivamente!
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+<!-- Card 4 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">S</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Silvia</div>
+                <div class="gr-card__time">2 anni fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Servizio trovato per caso è stata la svolta! Sono riuscita a preparare un esame grandissimo! Senza di loro non ce l’avrei mai fatta 🩷
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+
+
+        <!-- Card 2 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">N</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Nadia</div>
+                <div class="gr-card__time">1 anno fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Centro molto preparato in tutte le materie, sempre disponibili e professionali...lo consiglio al 100%... Grazie ragazzi!
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="gr-card" tabindex="0">
+          <div class="gr-card__head">
+            <div class="gr-card__user">
+              <span class="gr-card__avatar gr-card__avatar--initials" aria-hidden="true">A</span>
+                            <div class="gr-card__user-meta">
+                <div class="gr-card__name">Daniela</div>
+                <div class="gr-card__time">6 mesi fa</div>
+              </div>
+            </div>
+
+            <span class="gr-card__google" aria-hidden="true">G</span>
+          </div>
+
+          <div class="gr-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+          <p class="gr-card__text">
+            Recensione super positiva per TopTutor mio figlio Valerio, seconda liceo, gravi difficoltà in matematica, ha fatto qualche lezione con Roberto e mi torna a casa con un voto 8 al compito di matematica!! Mai successo! Quest'anno evitiamo di portarcela a settembre 🤓 Grazie mille a TopTutor, grazie Roberto e anche a Emmanuel sempre disponibile a trovarmi orari per le lezioni. Voto 💯
+          </p>
+
+          <a class="gr-card__link" href="https://share.google/IOfwgypNH0CCuj37W" target="_blank" rel="noopener">Leggi altre recensioni</a>
+        </article>
+      </div>
+
+      <button class="gr__nav gr__nav--right" type="button" aria-label="Next reviews">›</button>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // Carousel scroll (senza librerie)
+  (function () {
+    const track = document.getElementById("gr-track");
+    if (!track) return;
+
+    const left = document.querySelector(".gr__nav--left");
+    const right = document.querySelector(".gr__nav--right");
+
+    const scrollByCard = () => {
+      const card = track.querySelector(".gr-card");
+      if (!card) return 320;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || "16");
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    left?.addEventListener("click", () => {
+      track.scrollBy({ left: -scrollByCard(), behavior: "smooth" });
+    });
+
+    right?.addEventListener("click", () => {
+      track.scrollBy({ left: scrollByCard(), behavior: "smooth" });
+    });
+  })();
+</script>
+
+
+<section class="installments reveal" id="rate">
+  <div class="installments-wrap">
+    <h2 class="installments-title">Decidi tu come pagare i tuoi pacchetti ore</h2>
+    <span class="installments-underline" aria-hidden="true"></span>
+
+    <div class="installments-grid">
+      <!-- Findomestic -->
+      <article class="installments-card">
+        <div class="installments-head">
+          <div class="installments-head-left">
+            <p class="installments-kicker">Pagamento in un'unica soluzione</p>
+            <h3 class="installments-brand">con carta, apple pay, google pay</h3>
+            <span class="installments-mini-underline" aria-hidden="true"></span>
+          </div>
+
+          <!-- Metti qui il tuo logo (opzionale) -->
+          <div class="installments-logo" aria-label="Logo Findomestic">
+            💳
+          </div>
+        </div>
+
+        <p class="installments-text">
+          Dal <strong>momento dell'acquisto</strong> il corso è valido se sostenuto nelle sessioni dell'anno dell'acquisto. </strong>
+        </p>
+
+        <p class="installments-text">
+          Accedi o iscriviti <a href="prenota.html" target="_blank" rel="noopener noreferrer">e consulta termini e condizioni</a>
+          <strong>dal tuo</strong> account.
+        </p>
+      </article>
+
+      <!-- Klarna -->
+      <article class="installments-card">
+        <div class="installments-head">
+          <div class="installments-head-left">
+            <p class="installments-kicker">Pagamento in più soluzioni con</p>
+            <h3 class="installments-brand">Klarna</h3>
+            <span class="installments-mini-underline" aria-hidden="true"></span>
+          </div>
+
+          <div class="installments-pill" aria-label="Klarna">Klarna</div>
+        </div>
+
+        <p class="installments-text">
+          Con <strong>Klarna</strong> puoi scegliere se pagare in
+          <strong>3 rate senza interessi</strong> o 
+          <strong>comprare subito e pagare più tardi.</strong>.
+        </p>
+
+        <p class="installments-text">
+          Consulta i <a href="https://www.klarna.com/it/" target="_blank" rel="noopener noreferrer">termini e condizioni</a>
+          Klarna.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+      <!-- PACCHETTI (come home) -->
+      <section class="tb-pricing" aria-labelledby="tb-pricing-title">
+        <div class="tb-pricing__container">
+          <header class="tb-pricing__header">
+            <h2 id="tb-pricing-title" class="tb-pricing__title">Scegli la modalità di corso che preferisci</h2>
+            <p class="tb-pricing__subtitle">Corso individuale o corso in classi</p>
+          </header>
+
+          <div class="tb-pricing__grid">
+            <!-- BASIC -->
+            <article class="tb-plan">
+              <div class="tb-plan__top">
+                <div class="tb-plan__eyebrow">Corso da 60 ore</div>
+                <h3 class="tb-plan__name">Individuale</h3>
+                <span class="tb-plan__name-underline" aria-hidden="true"></span>
+              </div>
+
+              <div class="tb-plan__price">
+                <span class="tb-plan__price-now">1500€</span>
+                <span class="tb-plan__price-was"></span>
+              </div>
+
+              <div class="tb-plan__save">prezzo<strong>25€/h (acconto 200€)</strong></div>
+
+              <a class="tb-plan__btn" href="prenota.html">
+                <span class="tb-plan__btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="tb-cart" focusable="false">
+                    <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.66c.75 0 1.4-.41 1.74-1.03l3.24-5.88A1 1 0 0 0 21 5H6.21L5.77 3.35A1 1 0 0 0 4.8 2.6H2a1 1 0 1 0 0 2h2.05l2.53 9.43-.6 1.08A2 2 0 0 0 7.17 18H20a1 1 0 1 0 0-2H7.17Z"/>
+                  </svg>
+                </span>
+                Prenota
+              </a>
+
+              <div class="tb-plan__divider"></div>
+
+              <div class="tb-plan__section-title">Servizi inclusi</div>
+              <ul class="tb-plan__list">
+                <li><span class="tb-check" aria-hidden="true">✓</span> Lezioni · <strong>live</strong></li>
+                <li><span class="tb-check" aria-hidden="true">✓</span> Supporto · <strong>7/7</strong></li>
+                <li><span class="tb-check" aria-hidden="true">✓</span> Manuali · <strong>completi</strong></li>
+              </ul>
+            </article>
+
+            <!-- STANDARD (featured) -->
+            <article class="tb-plan tb-plan--featured" aria-label="Piano più popolare">
+              <div class="tb-plan__badge">Il più popolare</div>
+
+              <div class="tb-plan__top">
+                <div class="tb-plan__eyebrow">Corso da 60 ore</div>
+                <h3 class="tb-plan__name">In classi</h3>
+                <span class="tb-plan__name-underline" aria-hidden="true"></span>
+              </div>
+
+              <div class="tb-plan__price">
+                <span class="tb-plan__price-now">450€</span>
+                <span class="tb-plan__price-was">1500€</span>
+              </div>
+
+              <div class="tb-plan__save">Stai risparmiando <strong>1050€ (7.5€/h)</strong></div>
+
+              <a class="tb-plan__btn" href="prenota.html">
+                <span class="tb-plan__btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="tb-cart" focusable="false">
+                    <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.66c.75 0 1.4-.41 1.74-1.03l3.24-5.88A1 1 0 0 0 21 5H6.21L5.77 3.35A1 1 0 0 0 4.8 2.6H2a1 1 0 1 0 0 2h2.05l2.53 9.43-.6 1.08A2 2 0 0 0 7.17 18H20a1 1 0 1 0 0-2H7.17Z"/>
+                  </svg>
+                </span>
+                Prenota
+              </a>
+
+              <div class="tb-plan__divider"></div>
+
+              <div class="tb-plan__section-title">Servizi inclusi</div>
+              <ul class="tb-plan__list">
+                <li><span class="tb-check" aria-hidden="true">✓</span> Lezioni · <strong>live</strong></li>
+                <li><span class="tb-check" aria-hidden="true">✓</span> Supporto · <strong>7/7</strong></li>
+                <li><span class="tb-check" aria-hidden="true">✓</span> Manuali · <strong>completi</strong></li>
+              </ul>
+            </article>
+             <!-- PREMIUM -->
+            <!--<article class="tb-plan">
+              <div class="tb-plan__top">
+                <div class="tb-plan__eyebrow">Pacchetto da 36 ore</div>
+                <h3 class="tb-plan__name">Premium</h3>
+                <span class="tb-plan__name-underline" aria-hidden="true"></span>
+              </div>
+
+              <div class="tb-plan__price">
+                <span class="tb-plan__price-now">900€</span>
+                <span class="tb-plan__price-was"></span>
+              </div>
+
+              <div class="tb-plan__save">Prezzo pieno a <strong>25€/h</strong></div>
+
+              <a class="tb-plan__btn" href="prenota.html">
+                <span class="tb-plan__btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="tb-cart" focusable="false">
+                    <path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.17 14h9.66c.75 0 1.4-.41 1.74-1.03l3.24-5.88A1 1 0 0 0 21 5H6.21L5.77 3.35A1 1 0 0 0 4.8 2.6H2a1 1 0 1 0 0 2h2.05l2.53 9.43-.6 1.08A2 2 0 0 0 7.17 18H20a1 1 0 1 0 0-2H7.17Z"/>
+                  </svg>
+                </span>
+                Prenota
+              </a>
+
+              <div class="tb-plan__divider"></div>
+
+              <div class="tb-plan__section-title">Servizi inclusi</div>
+              <ul class="tb-plan__list">
+                <li><span class="tb-check" aria-hidden="true">✓</span> Assistenza · <strong>7/7</strong></li>
+                <li><span class="tb-check" aria-hidden="true">✓</span> Supporto · <strong>didattico</strong></li>
+                <li><span class="tb-check" aria-hidden="true">✓</span> Tutoraggio · <strong>avanzato</strong></li>
+              </ul>
+            </article>-->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="currentYear"></span> TopTutor.online — Tutti i diritti riservati.</p>
+      <a href="cookie-policy.html">Cookie Policy</a> ·
+<a href="#" onclick="openCookiePreferences(); return false;">Gestisci cookie</a>
+<br><a href="privacy-policy.html">Privacy Policy</a></br>
+    </footer>
+
+    <script>
+      // Header blur on scroll (uguale home)
+      const header = document.getElementById("siteHeader");
+      function onScroll() {
+        if (window.scrollY > 0) header.classList.add("is-scrolled");
+        else header.classList.remove("is-scrolled");
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    </script>
+
+    <script>
+      // Hamburger menu (uguale home)
+      (function () {
+        const header = document.getElementById("siteHeader");
+        const burger = document.getElementById("burgerBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+        if (!header || !burger || !mobileMenu) return;
+
+        function closeMenu() {
+          header.classList.remove("menu-open");
+          burger.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+        }
+
+        function toggleMenu() {
+          const open = header.classList.toggle("menu-open");
+          burger.setAttribute("aria-expanded", open ? "true" : "false");
+          mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+        }
+
+        burger.addEventListener("click", toggleMenu);
+
+        mobileMenu.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeMenu();
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 900) closeMenu();
+        });
+      })();
+    </script>
+
+    <script>
+      // Anno footer
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+      // Rotazione materie (università)
+      (function () {
+        const el = document.getElementById("rotatingSubject");
+        if (!el) return;
+
+        const subjects = [
+          "Biologia",
+          "Chimica",
+          "Fisica medica",
+          "Biochimica",
+          "Istologia",
+          "Anatomia",
+          "Genetica",
+          "Microbiologia",
+          "Fisiologia",
+          "Patologia"
+        ];
+
+        let i = 0;
+
+        function setSubject(text) {
+          el.classList.remove("fade-in");
+          el.classList.add("fade-out");
+
+          setTimeout(() => {
+            el.textContent = `"${text}"`;
+            el.classList.remove("fade-out");
+            el.classList.add("fade-in");
+          }, 180);
+        }
+
+        setSubject(subjects[i]);
+
+        setInterval(() => {
+          i = (i + 1) % subjects.length;
+          setSubject(subjects[i]);
+        }, 1500);
+      })();
+    </script>
+  </body>
+</html>
+
